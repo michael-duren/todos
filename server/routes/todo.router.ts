@@ -1,6 +1,6 @@
 import express from 'express';
 const todoRouter = express.Router();
-import pool from '../modules/pool.js';
+// import pool from '../modules/pool.js';
 
 // GET
 todoRouter.get('/', (_, res) => {
