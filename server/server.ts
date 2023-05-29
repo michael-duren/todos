@@ -12,7 +12,7 @@ app.use(express.static('build'));
 // app.use(express.static('public/'));
 
 /** ---------- EXPRESS ROUTES ---------- **/
-app.use('/todo', todoRouter);
+app.use('/api/todo', todoRouter);
 
 /** ---------- START SERVER ---------- **/
 ViteExpress.listen(app, PORT, () => {
