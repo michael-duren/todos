@@ -5,4 +5,5 @@ export enum Category {
   HEALTH = 'Health',
   FAMILY = 'Family',
   EXERCISE = 'Exercise',
+  PERSONAL = 'Personal',
 }
