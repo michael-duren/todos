@@ -1,6 +1,11 @@
 import express from 'express';
 const todoRouter = express.Router();
-import { createItem, getItems, updateItem } from '../querries/todoQuerries.ts';
+import {
+  createItem,
+  deleteItem,
+  getItems,
+  updateItem,
+} from '../querries/todoQuerries.ts';
 
 // GET
 todoRouter.get('/', async (_, res) => {
@@ -27,7 +32,7 @@ todoRouter.post('/', async (req, res) => {
 });
 
 // PUT
-todoRouter.put(':itemId', async (req, res) => {
+todoRouter.put('/:itemId', async (req, res) => {
   const itemId = req.params.itemId;
   const updatedItem = req.body;
 
@@ -41,5 +46,16 @@ todoRouter.put(':itemId', async (req, res) => {
 });
 
 // DELETE
+todoRouter.delete('/:itemId', async (req, res) => {
+  const itemId = req.params.itemId;
+
+  try {
+    await deleteItem(itemId);
+    res.sendStatus(204);
+  } catch (error) {
+    console.error(error);
+    res.sendStatus(500);
+  }
+});
 
 export default todoRouter;

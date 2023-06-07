@@ -44,9 +44,9 @@ export const updateItem = async (
 ): Promise<void | QueryResult<any>> => {
   const query = `
   UPDATE todos SET
-  name$1, image=$2, dateCreated=$3, dateDue=$4, description=$5,
-  isCompleted=$6, priority=$7, category=$8
-  WHERE id=$9
+  name=$1, image=$2, "dateCreated"=$3, "dateDue"=$4, description=$5,
+  "isCompleted"=$6, priority=$7, category=$8
+  WHERE id=$9;
   `;
 
   const queryParams = [
@@ -64,6 +64,19 @@ export const updateItem = async (
   try {
     return await pool.query(query, queryParams);
   } catch (error: any) {
-    throw new Error(error);
+    console.error(error);
+  }
+};
+
+export const deleteItem = async (
+  id: string
+): Promise<void | QueryResult<any>> => {
+  const query = `DELETE FROM todos WHERE id=$1`;
+  const queryParams = [id];
+
+  try {
+    return await pool.query(query, queryParams);
+  } catch (error) {
+    console.error(error);
   }
 };
