@@ -20,7 +20,9 @@ export default function AddTodoForm() {
   const { setIsModalOpen } = useContext(GeneralContext) as IGeneralContext;
 
   const onChange = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+    event: React.ChangeEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >
   ) => {
     const { name, value } = event.target;
     setFormData({ ...formData, [name]: value });
@@ -36,7 +38,6 @@ export default function AddTodoForm() {
   const inputs = [
     { placeholder: 'Name', name: 'name' },
     { placeholder: 'ImageURL', name: 'image' },
-    { placeholder: 'Description', name: 'description' },
   ];
 
   return (
@@ -57,10 +58,11 @@ export default function AddTodoForm() {
 
           return (
             <Fragment key={input.name}>
-              <label key={input.name} htmlFor="input.name">
+              <label key={input.name} htmlFor={input.name}>
                 {input.placeholder}
               </label>
               <input
+                required
                 onChange={onChange}
                 value={value.toString()}
                 type="text"
@@ -71,8 +73,18 @@ export default function AddTodoForm() {
             </Fragment>
           );
         })}
+        <label htmlFor="description">Description</label>
+        <textarea
+          required
+          className="border-2 text-sm my-2 rounded-xl p-2"
+          name="description"
+          cols={30}
+          rows={5}
+          placeholder="description"
+        ></textarea>
         <label htmlFor="date">Due Date</label>
         <input
+          required
           name="dateDue"
           onChange={onChange}
           className=" my-4 p-2 border-2 rounded-xl"
@@ -97,7 +109,7 @@ export default function AddTodoForm() {
           </div>
         </div>
         <button
-          className="bg-black rounded-lg m-8 text-white p-2"
+          className="bg-gray-700 rounded-lg hover:bg-gray-900 active:scale-105 transition-all duration-300 m-8 text-white p-2"
           type="submit"
         >
           Add
