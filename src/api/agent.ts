@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from 'axios';
-import ToDo from '../models/todo';
+import ToDo, { FormToDo } from '../models/todo';
 
 const getData = <T>(response: AxiosResponse<T>) => response.data;
 
@@ -13,7 +13,7 @@ const requests = {
 const TodoItems = {
   list: () => requests.get<ToDo[]>('/api/todo'),
   single: (id: string) => requests.get<ToDo>(`/api/todo/${id}`),
-  create: (newItem: ToDo) => requests.post<void>('/api/todo', newItem),
+  create: (newItem: FormToDo) => requests.post<void>('/api/todo', newItem),
   edit: (newItem: ToDo, id: string) =>
     requests.put<void>(`/api/todo/${id}`, newItem),
   delete: (id: string) => requests.del<void>(`/api/todo/${id}`),

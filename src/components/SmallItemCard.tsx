@@ -11,7 +11,6 @@ interface Props {
 
 export default function SmallItemCard({ todo }: Props) {
   const { name, priority, dateDue, isCompleted, category } = todo;
-  console.log(typeof dateDue);
 
   const buttonStyle =
     priority.toLowerCase() === 'high'

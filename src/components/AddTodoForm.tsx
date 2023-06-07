@@ -4,6 +4,7 @@ import { Fragment, useContext, useState } from 'react';
 import { GeneralContext, IGeneralContext } from '../context/GeneralContext';
 import { Priority } from '../models/priority';
 import { FormToDo } from '../models/todo';
+import agent from '../api/agent';
 
 export default function AddTodoForm() {
   const initialState: FormToDo = {
@@ -13,11 +14,13 @@ export default function AddTodoForm() {
     dateDue: '',
     description: '',
     isCompleted: false,
-    priority: '',
-    category: '',
+    priority: Priority.HIGH,
+    category: Category.WORK,
   };
   const [formData, setFormData] = useState(initialState);
-  const { setIsModalOpen } = useContext(GeneralContext) as IGeneralContext;
+  const { setIsModalOpen, setTodoList } = useContext(
+    GeneralContext
+  ) as IGeneralContext;
 
   const onChange = (
     event: React.ChangeEvent<
@@ -26,11 +29,22 @@ export default function AddTodoForm() {
   ) => {
     const { name, value } = event.target;
     setFormData({ ...formData, [name]: value });
+    console.log(formData);
   };
 
-  const onSubmit = (event: React.FormEvent) => {
+  const onSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    const newToDo = { ...formData, dateCreated: new Date() };
+    const newToDo = { ...formData, dateCreated: new Date().toISOString() };
+    setFormData(initialState);
+    setIsModalOpen(false);
+
+    try {
+      await agent.TodoItems.create(newToDo);
+      const newToDos = await agent.TodoItems.list();
+      setTodoList(newToDos);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const inputs = [
@@ -76,9 +90,11 @@ export default function AddTodoForm() {
           required
           className="border-2 text-sm my-2 rounded-xl p-2"
           name="description"
+          onChange={onChange}
           cols={30}
           rows={5}
           placeholder="description"
+          value={formData.description}
         ></textarea>
         <label htmlFor="date">Due Date</label>
         <input
@@ -87,11 +103,16 @@ export default function AddTodoForm() {
           onChange={onChange}
           className=" my-4 p-2 border-2 rounded-xl"
           type="date"
+          value={formData.dateDue}
         />
         <div className="grid my-4  gap-4 grid-cols-2">
           <div className="flex h-full gap-4 w-full flex-col">
             <label htmlFor="category">Category</label>
-            <select onChange={onChange} name="category">
+            <select
+              value={formData.category}
+              onChange={onChange}
+              name="category"
+            >
               {Object.entries(Category).map(([key, value]) => {
                 return <option key={key}>{value}</option>;
               })}
@@ -99,7 +120,11 @@ export default function AddTodoForm() {
           </div>
           <div className="flex flex-col gap-4 h-full">
             <label htmlFor="priority">Priority</label>
-            <select onChange={onChange} name="priority">
+            <select
+              onChange={onChange}
+              value={formData.priority}
+              name="priority"
+            >
               {Object.entries(Priority).map(([key, priority]) => {
                 return <option key={key}>{priority}</option>;
               })}

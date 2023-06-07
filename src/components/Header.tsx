@@ -1,12 +1,18 @@
 import AssignmentTurnedInIcon from '@mui/icons-material/AssignmentTurnedIn';
 import Dropdown from './Dropdown';
 import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOutlined';
+import { useContext } from 'react';
+import { GeneralContext, IGeneralContext } from '../context/GeneralContext';
 
 export default function Header() {
+  const { isModalOpen, setIsModalOpen } = useContext(
+    GeneralContext
+  ) as IGeneralContext;
+
   const dropDownOptions = [
     {
       option: 'Add Todo',
-      onClick: () => console.log('Add Todo'),
+      onClick: () => setIsModalOpen(!isModalOpen),
       ItemIcon: AddCircleOutlineOutlinedIcon,
     },
   ];

@@ -6,6 +6,7 @@ export interface IGeneralContext {
   isModalOpen: boolean;
   setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
   todoList: ToDo[];
+  setTodoList: React.Dispatch<React.SetStateAction<ToDo[]>>;
 }
 
 export const GeneralContext = createContext<IGeneralContext | null>(null);
@@ -25,7 +26,9 @@ export const GeneralContextProvider = ({ children }: Props) => {
   }, []);
 
   return (
-    <GeneralContext.Provider value={{ isModalOpen, setIsModalOpen, todoList }}>
+    <GeneralContext.Provider
+      value={{ isModalOpen, setIsModalOpen, todoList, setTodoList }}
+    >
       {children}
     </GeneralContext.Provider>
   );
