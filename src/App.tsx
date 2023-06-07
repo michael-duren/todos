@@ -1,10 +1,16 @@
-import './App.css';
+import Header from './components/Header';
+import Layout from './components/Layout';
 
 function App() {
   return (
     <>
-      <h1>Hello There</h1>
-      <p>test</p>
+      <Layout>
+        <Header />
+        <main>
+          <h1 className="text-red-500">Hello There</h1>
+          <p>test</p>
+        </main>
+      </Layout>
     </>
   );
 }
