@@ -10,13 +10,13 @@ function App() {
       <Layout>
         <Header />
         <main className="min-h-[40rem]  grid grid-cols-12 grid-rows-1 mt-8">
-          <div className="col-span-3 border-2 flex justify-center">
+          <div className="col-span-3  flex justify-center">
             <AvatarPanel />
           </div>
           <div className="col-span-6 flex justify-center">
             <MainPanel />
           </div>
-          <div className="col-span-3 border-2 flex justify-center">
+          <div className="col-span-3  flex justify-center">
             <ItemPanel />
           </div>
         </main>
