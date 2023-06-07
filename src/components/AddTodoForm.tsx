@@ -10,7 +10,7 @@ export default function AddTodoForm() {
     name: '',
     image: '',
     dateCreated: '',
-    dueDate: '',
+    dateDue: '',
     description: '',
     isCompleted: false,
     priority: '',
@@ -73,7 +73,7 @@ export default function AddTodoForm() {
         })}
         <label htmlFor="date">Due Date</label>
         <input
-          name="dueDate"
+          name="dateDue"
           onChange={onChange}
           className=" my-4 p-2 border-2 rounded-xl"
           type="date"

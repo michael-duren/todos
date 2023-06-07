@@ -1,9 +1,9 @@
 CREATE TABLE todos (
 	"id" serial primary key,
 	"name" VARCHAR(60),
-	"image" VARCHAR(60),
+	"image" VARCHAR(256),
 	"dateCreated" DATE,
-	"dueDate" DATE,
+	"dateDue" DATE,
 	"description" TEXT,
 	"isCompleted" boolean,
 	"priority" VARCHAR(10),

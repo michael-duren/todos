@@ -5,7 +5,7 @@ export default interface ToDo {
   name: string;
   image: string;
   dateCreated: Date;
-  dueDate: Date;
+  dateDue: Date;
   description: string;
   isCompleted: boolean;
   priority: Priority;
@@ -16,7 +16,7 @@ export interface FormToDo {
   name: string;
   image: string;
   dateCreated: string;
-  dueDate: string;
+  dateDue: string;
   description: string;
   isCompleted: boolean;
   priority: string;
