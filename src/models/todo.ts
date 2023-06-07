@@ -11,3 +11,14 @@ export default interface ToDo {
   priority: Priority;
   category: Category;
 }
+
+export interface FormToDo {
+  name: string;
+  image: string;
+  dateCreated: string;
+  dueDate: string;
+  description: string;
+  isCompleted: boolean;
+  priority: string;
+  category: string;
+}
