@@ -1,4 +1,4 @@
-export enum Categories {
+export enum Category {
   WORK = 'Work',
   SCHOOL = 'School',
   HOME = 'Home',

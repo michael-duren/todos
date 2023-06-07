@@ -1,4 +1,5 @@
-import { Categories } from './category';
+import { Category } from './category';
+import { Priority } from './priority';
 
 export default interface ToDo {
   name: string;
@@ -7,6 +8,6 @@ export default interface ToDo {
   dueDate: Date;
   description: string;
   isCompleted: boolean;
-  priority: string;
-  category: Categories;
+  priority: Priority;
+  category: Category;
 }

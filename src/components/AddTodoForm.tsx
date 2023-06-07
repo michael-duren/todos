@@ -1,7 +1,8 @@
 import CloseIcon from '@mui/icons-material/Close';
-import { Categories } from '../models/category';
+import { Category } from '../models/category';
 import { useContext } from 'react';
 import { GeneralContext, IGeneralContext } from '../context/GeneralContext';
+import { Priority } from '../models/priority';
 
 export default function AddTodoForm() {
   const { setIsModalOpen } = useContext(GeneralContext) as IGeneralContext;
@@ -23,23 +24,31 @@ export default function AddTodoForm() {
           <CloseIcon />
         </button>
       </div>
-      <div className="flex flex-col">
+      <div className="flex mx-8 flex-col">
         {inputs.map((input) => {
           return (
-            <input
-              type="text"
-              className="m-8 p-2 border-2 rounded-xl"
-              placeholder={input.placeholder}
-              name={input.name}
-            />
+            <>
+              <label htmlFor="input.name">{input.placeholder}</label>
+              <input
+                type="text"
+                className="my-4 p-2 border-2 rounded-xl"
+                placeholder={input.placeholder}
+                name={input.name}
+              />
+            </>
           );
         })}
-        <input className="m-8 p-2 border-2 rounded-xl" type="date" />
-        <div className="grid m-8 gap-4 grid-cols-2">
+        <label htmlFor="date">Due Date</label>
+        <input
+          name="dueDate"
+          className=" my-4 p-2 border-2 rounded-xl"
+          type="date"
+        />
+        <div className="grid my-4  gap-4 grid-cols-2">
           <div className="flex h-full gap-4 w-full flex-col">
             <label htmlFor="category">Category</label>
             <select name="category">
-              {Object.entries(Categories).map(([key, value]) => {
+              {Object.entries(Category).map(([key, value]) => {
                 return (
                   <option key={key} value={value}>
                     {value}
@@ -51,13 +60,20 @@ export default function AddTodoForm() {
           <div className="flex flex-col gap-4 h-full">
             <label htmlFor="priority">Priority</label>
             <select name="priority">
-              {Array.from({ length: 3 }).map((_, i) => {
-                return <option value={i + 1}>{i + 1}</option>;
+              {Object.entries(Priority).map(([key, value]) => {
+                return (
+                  <option key={key} value="value">
+                    {value}
+                  </option>
+                );
               })}
             </select>
           </div>
         </div>
-        <button className="bg-black m-8 text-white p-2" type="submit">
+        <button
+          className="bg-black rounded-lg m-8 text-white p-2"
+          type="submit"
+        >
           Add
         </button>
       </div>
