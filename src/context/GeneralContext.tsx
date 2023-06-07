@@ -1,6 +1,6 @@
 import React, { createContext, useEffect, useState } from 'react';
 import ToDo from '../models/todo';
-import axios, { AxiosResponse } from 'axios';
+import agent from '../api/agent';
 
 export interface IGeneralContext {
   isModalOpen: boolean;
@@ -19,11 +19,9 @@ export const GeneralContextProvider = ({ children }: Props) => {
   const [todoList, setTodoList] = useState<ToDo[]>([]);
 
   useEffect(() => {
-    axios
-      .get('/api/todo')
-      .then((res: AxiosResponse) => res.data)
-      .then((todos) => setTodoList(todos))
-      .catch((err) => console.error(err));
+    agent.TodoItems.list()
+      .then((items) => setTodoList(items))
+      .catch((error) => console.error(error));
   }, []);
 
   return (

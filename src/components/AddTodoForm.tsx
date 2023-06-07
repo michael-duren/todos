@@ -31,8 +31,6 @@ export default function AddTodoForm() {
   const onSubmit = (event: React.FormEvent) => {
     event.preventDefault();
     const newToDo = { ...formData, dateCreated: new Date() };
-
-    console.log(newToDo);
   };
 
   const inputs = [
