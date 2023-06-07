@@ -1,3 +1,4 @@
+import AddTodoForm from './components/AddTodoForm';
 import AvatarPanel from './components/AvatarPanel';
 import Header from './components/Header';
 import ItemPanel from './components/ItemPanel';
@@ -22,7 +23,9 @@ function App() {
           </div>
         </main>
       </Layout>
-      <Modal />
+      <Modal>
+        <AddTodoForm />
+      </Modal>
     </>
   );
 }

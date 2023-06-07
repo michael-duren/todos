@@ -1,8 +1,8 @@
 export enum Categories {
-  WORK = 'work',
-  SCHOOL = 'school',
-  HOME = 'home',
-  HEALTH = 'health',
-  FAMILY = 'family',
-  EXERCISE = 'exercise',
+  WORK = 'Work',
+  SCHOOL = 'School',
+  HOME = 'Home',
+  HEALTH = 'Health',
+  FAMILY = 'Family',
+  EXERCISE = 'Exercise',
 }
