@@ -2,6 +2,7 @@ import { Category } from './category';
 import { Priority } from './priority';
 
 export default interface ToDo {
+  id: number;
   name: string;
   image: string;
   dateCreated: Date;
