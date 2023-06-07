@@ -3,6 +3,7 @@ import Header from './components/Header';
 import ItemPanel from './components/ItemPanel';
 import Layout from './components/Layout';
 import MainPanel from './components/MainPanel';
+import Modal from './components/Modal';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           </div>
         </main>
       </Layout>
+      <Modal />
     </>
   );
 }

@@ -1,10 +1,13 @@
 import { Menu, Transition } from '@headlessui/react';
-import { Fragment } from 'react';
+import { Fragment, useContext } from 'react';
 import ExpandMoreOutlinedIcon from '@mui/icons-material/ExpandMoreOutlined';
 import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOutlined';
 import AddCircleOutlinedIcon from '@mui/icons-material/AddCircleOutlined';
+import { GeneralContext, IGeneralContext } from '../context/GeneralContext';
 
 export default function Dropdown() {
+  const { setIsModalOpen } = useContext(GeneralContext) as IGeneralContext;
+
   return (
     <div>
       <Menu as="div" className="relative inline-block text-left">
@@ -31,6 +34,7 @@ export default function Dropdown() {
               <Menu.Item>
                 {({ active }) => (
                   <button
+                    onClick={() => setIsModalOpen(true)}
                     className={`${
                       active ? 'bg-gray-300 bg-opacity-50' : 'text-gray-900'
                     } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
