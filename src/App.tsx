@@ -1,14 +1,24 @@
+import AvatarPanel from './components/AvatarPanel';
 import Header from './components/Header';
+import ItemPanel from './components/ItemPanel';
 import Layout from './components/Layout';
+import MainPanel from './components/MainPanel';
 
 function App() {
   return (
     <>
       <Layout>
         <Header />
-        <main>
-          <h1 className="text-red-500">Hello There</h1>
-          <p>test</p>
+        <main className="min-h-[40rem]  grid grid-cols-12 grid-rows-1 mt-8">
+          <div className="col-span-3 border-2 flex justify-center">
+            <AvatarPanel />
+          </div>
+          <div className="col-span-6 flex justify-center">
+            <MainPanel />
+          </div>
+          <div className="col-span-3 border-2 flex justify-center">
+            <ItemPanel />
+          </div>
         </main>
       </Layout>
     </>
