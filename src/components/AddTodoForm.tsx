@@ -5,6 +5,7 @@ import { GeneralContext, IGeneralContext } from '../context/GeneralContext';
 import { Priority } from '../models/priority';
 import { FormToDo } from '../models/todo';
 import agent from '../api/agent';
+import { toast } from 'react-hot-toast';
 
 export default function AddTodoForm() {
   const initialState: FormToDo = {
@@ -18,7 +19,7 @@ export default function AddTodoForm() {
     category: Category.WORK,
   };
   const [formData, setFormData] = useState(initialState);
-  const { setIsModalOpen, setTodoList } = useContext(
+  const { setIsModalOpen, setTodoList, setSelectedTodo } = useContext(
     GeneralContext
   ) as IGeneralContext;
 
@@ -42,8 +43,11 @@ export default function AddTodoForm() {
       await agent.TodoItems.create(newToDo);
       const newToDos = await agent.TodoItems.list();
       setTodoList(newToDos);
+      setSelectedTodo(newToDos[0]);
+      toast.success('ToDo added successfully');
     } catch (error) {
       console.log(error);
+      toast.error('Error adding ToDo');
     }
   };
 
