@@ -6,13 +6,19 @@ import { Priority } from '../models/priority';
 import { EditFormToDo, FormToDo } from '../models/todo';
 import agent from '../api/agent';
 import { toast } from 'react-hot-toast';
+import { toTitleCase } from '../utils/toTitleCase';
 
 interface Props {
   editedTodo?: EditFormToDo;
   isEdit: boolean;
+  setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export default function ToDoForm({ editedTodo, isEdit }: Props) {
+export default function ToDoForm({
+  editedTodo,
+  isEdit,
+  setIsModalOpen,
+}: Props) {
   const initialState = editedTodo ?? {
     name: '',
     image: '',
@@ -26,7 +32,7 @@ export default function ToDoForm({ editedTodo, isEdit }: Props) {
   const [formData, setFormData] = useState<FormToDo | EditFormToDo>(
     initialState
   );
-  const { setIsModalOpen, setUnCompleteToDoList, setSelectedTodo } = useContext(
+  const { setUnCompleteToDoList, setSelectedTodo } = useContext(
     GeneralContext
   ) as IGeneralContext;
 
@@ -61,12 +67,13 @@ export default function ToDoForm({ editedTodo, isEdit }: Props) {
 
     if (isEdit) {
       setIsModalOpen(false);
+      console.log('EDITING');
       try {
         await agent.TodoItems.edit(formData, editedTodo!.id);
         const newToDos = await agent.TodoItems.listUnComplete();
         setUnCompleteToDoList(newToDos);
         setSelectedTodo(newToDos[0]);
-        toast.success('ToDo updated successfully');
+        toast.success(`${toTitleCase(formData.name)} updated successfully`);
       } catch (error) {
         console.log(error);
       }
@@ -123,7 +130,9 @@ export default function ToDoForm({ editedTodo, isEdit }: Props) {
           onChange={onChange}
           className=" my-4 p-2 border-2 rounded-xl"
           type="date"
-          value={formData.dateDue}
+          value={
+            formData.dateDue ? formData.dateDue : new Date().toDateString()
+          }
         />
         <div className="grid my-4  gap-4 grid-cols-2">
           <div className="flex h-full gap-4 w-full flex-col">
@@ -155,7 +164,7 @@ export default function ToDoForm({ editedTodo, isEdit }: Props) {
           className="bg-gray-700 rounded-lg hover:bg-gray-900 active:scale-105 transition-all duration-300 m-8 text-white p-2"
           type="submit"
         >
-          Add
+          {isEdit ? 'Edit' : 'Add'}
         </button>
       </div>
     </form>

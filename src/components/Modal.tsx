@@ -1,16 +1,17 @@
 import { Dialog, Transition } from '@headlessui/react';
-import { Fragment, useContext } from 'react';
-import { GeneralContext, IGeneralContext } from '../context/GeneralContext';
+import { Fragment } from 'react';
 
 interface Props {
   children: React.ReactNode;
+  isModalOpen: boolean;
+  setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export default function MyModal({ children }: Props) {
-  const { isModalOpen, setIsModalOpen } = useContext(
-    GeneralContext
-  ) as IGeneralContext;
-
+export default function MyModal({
+  children,
+  isModalOpen,
+  setIsModalOpen,
+}: Props) {
   function closeModal() {
     setIsModalOpen(false);
   }
