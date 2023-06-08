@@ -8,6 +8,8 @@ import dayjs from 'dayjs';
 import realtiveTime from 'dayjs/plugin/relativeTime';
 import { useContext } from 'react';
 import { GeneralContext, IGeneralContext } from '../context/GeneralContext';
+import toast from 'react-hot-toast';
+import agent from '../api/agent';
 dayjs.extend(realtiveTime);
 
 interface Props {
@@ -16,7 +18,7 @@ interface Props {
 
 export default function SmallItemCard({ todo }: Props) {
   const { name, priority, dateDue, isCompleted, category } = todo;
-  const { todoList, setSelectedTodo } = useContext(
+  const { todoList, setSelectedTodo, setTodoList } = useContext(
     GeneralContext
   ) as IGeneralContext;
 
@@ -36,6 +38,20 @@ export default function SmallItemCard({ todo }: Props) {
     ? 'bg-red-500 bg-opacity-20'
     : 'bg-white';
 
+  const onComplete = async () => {
+    try {
+      const completedTodo = { ...todo };
+      await agent.TodoItems.complete(completedTodo, completedTodo.id);
+      toast.success(`${toTitleCase(name)} Completed`);
+      setSelectedTodo(null);
+      const newTodoItems = await agent.TodoItems.list();
+      setTodoList(newTodoItems);
+    } catch (error) {
+      console.log(error);
+      toast.error('Problem completing item');
+    }
+  };
+
   return (
     <>
       {!isCompleted && (
@@ -43,7 +59,10 @@ export default function SmallItemCard({ todo }: Props) {
           className={`flex ${itemUrgency} my-8 shadow-lg justify-between items-center  p-4 rounded-xl`}
         >
           <div className="flex">
-            <button className="group w-20 flex items-center">
+            <button
+              onClick={onComplete}
+              className="group w-20 flex items-center"
+            >
               <PanoramaFishEyeIcon
                 className={`group-hover:hidden rounded-full bg-opacity-70 hover:bg-opacity-100 ${buttonStyle}`}
               />

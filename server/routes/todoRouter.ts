@@ -3,6 +3,7 @@ const todoRouter = express.Router();
 import {
   createItem,
   deleteItem,
+  getCompletedItems,
   getItems,
   updateItem,
 } from '../querries/todoQuerries.ts';
@@ -11,6 +12,28 @@ import {
 todoRouter.get('/', async (_, res) => {
   try {
     const items = await getItems();
+    res.send(items);
+  } catch (error: any) {
+    console.error(error);
+    res.sendStatus(500);
+  }
+});
+
+// GET ONLY COMPLETE ITEMS
+todoRouter.get('/complete', async (_, res) => {
+  try {
+    const items = await getCompletedItems();
+    res.send(items);
+  } catch (error: any) {
+    console.error(error);
+    res.sendStatus(500);
+  }
+});
+
+// GET ONLY UNCOMPLETE ITEMS
+todoRouter.get('/uncomplete', async (_, res) => {
+  try {
+    const items = await getCompletedItems();
     res.send(items);
   } catch (error: any) {
     console.error(error);

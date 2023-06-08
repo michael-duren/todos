@@ -13,6 +13,28 @@ export const getItems = async (): Promise<void | ToDo[]> => {
   }
 };
 
+export const getCompletedItems = async (): Promise<void | ToDo[]> => {
+  const query = 'SELECT * FROM todos WHERE "isCompleted"=\'true\'';
+
+  try {
+    const result = await pool.query(query);
+    return result.rows;
+  } catch (error: any) {
+    throw new Error(error);
+  }
+};
+
+export const getUncompletedItems = async (): Promise<void | ToDo[]> => {
+  const query = 'SELECT * FROM todos WHERE "isCompleted"=\'false\'';
+
+  try {
+    const result = await pool.query(query);
+    return result.rows;
+  } catch (error: any) {
+    throw new Error(error);
+  }
+};
+
 export const createItem = async (
   newItem: ToDo
 ): Promise<void | QueryResult<any>> => {

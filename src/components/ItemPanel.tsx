@@ -9,9 +9,13 @@ import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 import dayjs from 'dayjs';
 import { isItemDue } from '../utils/isItemDo';
+import agent from '../api/agent';
+import { toast } from 'react-hot-toast';
 
 export default function ItemPanel() {
-  const { selectedTodo } = useContext(GeneralContext) as IGeneralContext;
+  const { selectedTodo, setSelectedTodo, setTodoList } = useContext(
+    GeneralContext
+  ) as IGeneralContext;
 
   const buttonStyle =
     (selectedTodo && selectedTodo.priority.toLowerCase()) === 'high'
@@ -20,7 +24,19 @@ export default function ItemPanel() {
       ? 'text-orange-500 '
       : 'text-blue-500 ';
 
-  console.log(buttonStyle);
+  const onComplete = async () => {
+    try {
+      const completedTodo = { ...selectedTodo! };
+      await agent.TodoItems.complete(completedTodo, completedTodo.id);
+      toast.success(`${selectedTodo?.name} Completed`);
+      setSelectedTodo(null);
+      const newTodoItems = await agent.TodoItems.list();
+      setTodoList(newTodoItems);
+    } catch (error) {
+      console.log(error);
+      toast.error('Problem completing item');
+    }
+  };
 
   return (
     <>
@@ -33,7 +49,7 @@ export default function ItemPanel() {
               src={selectedTodo.image}
               alt={selectedTodo.name}
             />
-            <div className="flex flex-col min-w-[15rem]  gap-4 p-2">
+            <div className="flex flex-col w-[15rem]  gap-4 p-2">
               {/* Title */}
               <div>
                 <h2 className="text-xl  items-center flex justify-between">
@@ -73,6 +89,7 @@ export default function ItemPanel() {
           {/* ACTIONS */}
           <div className=" w-full p-2 flex items-center justify-evenly">
             <button
+              onClick={onComplete}
               className="bg-green-500 shadow-lg transition-all duration-300 active:scale-105 text-xs text-white px-4 py-2 
             hover:bg-opacity-100 bg-opacity-80 rounded-xl"
             >
