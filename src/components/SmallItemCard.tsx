@@ -31,6 +31,7 @@ export default function SmallItemCard({ todo }: Props) {
       : priority.toLowerCase() === 'medium'
       ? 'bg-orange-500 text-white'
       : 'bg-blue-500 text-white';
+
   const itemUrgency = isItemDue(new Date(dateDue))
     ? 'bg-red-500 bg-opacity-20'
     : 'bg-white';
