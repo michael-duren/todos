@@ -39,7 +39,7 @@ export default function ItemPanel() {
   };
 
   return (
-    <>
+    <div className="col-span-3  flex justify-center">
       {selectedTodo && (
         <div className="flex flex-col items-center shadow-lg m-2 p-2 rounded-xl">
           {/* INFO */}
@@ -110,6 +110,6 @@ export default function ItemPanel() {
           </div>
         </div>
       )}
-    </>
+    </div>
   );
 }

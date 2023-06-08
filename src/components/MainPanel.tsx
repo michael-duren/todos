@@ -56,30 +56,32 @@ export default function MainPanel() {
   console.log(orderBy);
 
   return (
-    <div className="h-full w-full">
-      <div className="flex justify-between items-center">
-        <div>
-          <h2 className="text-2xl">To Do:</h2>
+    <div className="col-span-6 flex justify-center">
+      <div className="h-full w-full">
+        <div className="flex justify-between items-center">
+          <div>
+            <h2 className="text-2xl">To Do:</h2>
+          </div>
+          <Dropdown invert title="Order By" items={dropdownOptions} />
         </div>
-        <Dropdown invert title="Order By" items={dropdownOptions} />
+        <ul>
+          {orderBy === 'dueDate'
+            ? orderedByDate.map((todo) => {
+                return (
+                  <li key={todo.id}>
+                    <SmallItemCard todo={todo} />
+                  </li>
+                );
+              })
+            : orderByPriority.map((todo) => {
+                return (
+                  <li key={todo.id}>
+                    <SmallItemCard todo={todo} />
+                  </li>
+                );
+              })}
+        </ul>
       </div>
-      <ul>
-        {orderBy === 'dueDate'
-          ? orderedByDate.map((todo) => {
-              return (
-                <li key={todo.id}>
-                  <SmallItemCard todo={todo} />
-                </li>
-              );
-            })
-          : orderByPriority.map((todo) => {
-              return (
-                <li key={todo.id}>
-                  <SmallItemCard todo={todo} />
-                </li>
-              );
-            })}
-      </ul>
     </div>
   );
 }
