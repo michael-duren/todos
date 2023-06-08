@@ -9,6 +9,8 @@ export interface IGeneralContext {
   setTodoList: React.Dispatch<React.SetStateAction<ToDo[]>>;
   selectedTodo: ToDo | null;
   setSelectedTodo: React.Dispatch<React.SetStateAction<ToDo | null>>;
+  completeToDoList: ToDo[];
+  setCompleteToDoList: React.Dispatch<React.SetStateAction<ToDo[]>>;
 }
 
 export const GeneralContext = createContext<IGeneralContext | null>(null);
@@ -20,6 +22,7 @@ interface Props {
 export const GeneralContextProvider = ({ children }: Props) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [unCompleteToDoList, setUnCompleteToDoList] = useState<ToDo[]>([]);
+  const [completeToDoList, setCompleteToDoList] = useState<ToDo[]>([]);
   const [selectedTodo, setSelectedTodo] = useState<ToDo | null>(null);
 
   useEffect(() => {
@@ -28,6 +31,10 @@ export const GeneralContextProvider = ({ children }: Props) => {
         setUnCompleteToDoList(items);
         setSelectedTodo(items[0]);
       })
+      .catch((error) => console.error(error));
+
+    agent.TodoItems.listComplete()
+      .then((items) => setCompleteToDoList(items))
       .catch((error) => console.error(error));
   }, []);
 
@@ -40,6 +47,8 @@ export const GeneralContextProvider = ({ children }: Props) => {
         setTodoList: setUnCompleteToDoList,
         selectedTodo,
         setSelectedTodo,
+        completeToDoList,
+        setCompleteToDoList,
       }}
     >
       {children}

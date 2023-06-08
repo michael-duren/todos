@@ -17,7 +17,7 @@ interface Props {
 }
 
 export default function SmallItemCard({ todo }: Props) {
-  const { name, priority, dateDue, isCompleted, category } = todo;
+  const { name, priority, dateDue, category } = todo;
   const { todoList, setSelectedTodo, setTodoList } = useContext(
     GeneralContext
   ) as IGeneralContext;
@@ -54,37 +54,32 @@ export default function SmallItemCard({ todo }: Props) {
 
   return (
     <>
-      {!isCompleted && (
-        <div
-          className={`flex ${itemUrgency} my-8 shadow-lg justify-between items-center  p-4 rounded-xl`}
-        >
-          <div className="flex">
-            <button
-              onClick={onComplete}
-              className="group w-20 flex items-center"
-            >
-              <PanoramaFishEyeIcon
-                className={`group-hover:hidden rounded-full bg-opacity-70 hover:bg-opacity-100 ${buttonStyle}`}
-              />
-              <CheckCircleOutlineIcon
-                className={`group-hover:visible invisible rounded-full bg-opacity-70 hover:bg-opacity-100 ${buttonStyle}`}
-              />
-            </button>
-            <h4
-              onClick={() => selectItem(todo.id)}
-              className="text-gray-700 font-semibold hover:text-gray-900 hover:font-bold cursor-pointer"
-            >
-              {toTitleCase(name)}
-            </h4>
-          </div>
-          <div className="flex gap-2 items-center">
-            <div className="text-sm text-gray-500">
-              <i>Due {dayjs(dateDue).fromNow()}</i>
-            </div>
-            <CategoryIcon category={category} styles="text-gray-500" />
-          </div>
+      <div
+        className={`flex ${itemUrgency} my-8 shadow-lg justify-between items-center  p-4 rounded-xl`}
+      >
+        <div className="flex">
+          <button onClick={onComplete} className="group w-20 flex items-center">
+            <PanoramaFishEyeIcon
+              className={`group-hover:hidden rounded-full bg-opacity-70 hover:bg-opacity-100 ${buttonStyle}`}
+            />
+            <CheckCircleOutlineIcon
+              className={`group-hover:visible invisible rounded-full bg-opacity-70 hover:bg-opacity-100 ${buttonStyle}`}
+            />
+          </button>
+          <h4
+            onClick={() => selectItem(todo.id)}
+            className="text-gray-700 font-semibold hover:text-gray-900 hover:font-bold cursor-pointer"
+          >
+            {toTitleCase(name)}
+          </h4>
         </div>
-      )}
+        <div className="flex gap-2 items-center">
+          <div className="text-sm text-gray-500">
+            <i>Due {dayjs(dateDue).fromNow()}</i>
+          </div>
+          <CategoryIcon category={category} styles="text-gray-500" />
+        </div>
+      </div>
     </>
   );
 }
