@@ -22,6 +22,7 @@ export default function SmallItemCard({ todo }: Props) {
     unCompleteToDoList: todoList,
     setSelectedTodo,
     setUnCompleteToDoList,
+    setCompleteToDoList,
   } = useContext(GeneralContext) as IGeneralContext;
 
   const selectItem = (id: number) => {
@@ -48,6 +49,8 @@ export default function SmallItemCard({ todo }: Props) {
       setSelectedTodo(null);
       const newTodoItems = await agent.TodoItems.listUnComplete();
       setUnCompleteToDoList(newTodoItems);
+      const completeToDoItems = await agent.TodoItems.listComplete();
+      setCompleteToDoList(completeToDoItems);
     } catch (error) {
       console.log(error);
       toast.error('Problem completing item');

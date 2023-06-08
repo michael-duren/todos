@@ -20,6 +20,7 @@ const TodoItems = {
     requests.put<void>(`/api/todo/${id}`, newItem),
   complete: async (newItem: ToDo, id: number) => {
     newItem.isCompleted = true;
+    newItem.dateCompleted = new Date();
     await requests.put<void>(`/api/todo/${id}`, newItem);
   },
   delete: (id: number) => requests.del<void>(`/api/todo/${id}`),

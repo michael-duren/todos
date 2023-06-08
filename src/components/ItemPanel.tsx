@@ -15,9 +15,12 @@ import Modal from './Modal';
 import ToDoForm from './ToDoForm';
 
 export default function ItemPanel() {
-  const { selectedTodo, setSelectedTodo, setUnCompleteToDoList } = useContext(
-    GeneralContext
-  ) as IGeneralContext;
+  const {
+    selectedTodo,
+    setSelectedTodo,
+    setUnCompleteToDoList,
+    setCompleteToDoList,
+  } = useContext(GeneralContext) as IGeneralContext;
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const buttonStyle =
@@ -34,6 +37,8 @@ export default function ItemPanel() {
       toast.success(`${selectedTodo?.name} Completed`);
       setSelectedTodo(null);
       const newTodoItems = await agent.TodoItems.listUnComplete();
+      const completeToDoItems = await agent.TodoItems.listComplete();
+      setCompleteToDoList(completeToDoItems);
       setUnCompleteToDoList(newTodoItems);
     } catch (error) {
       console.log(error);

@@ -66,9 +66,9 @@ export const updateItem = async (
 ): Promise<void | QueryResult<any>> => {
   const query = `
   UPDATE todos SET
-  name=$1, image=$2, "dateCreated"=$3, "dateDue"=$4, description=$5,
-  "isCompleted"=$6, priority=$7, category=$8
-  WHERE id=$9;
+  name=$1, image=$2, "dateCreated"=$3, "dateDue"=$4, "dateCompleted"=$5, description=$6,
+  "isCompleted"=$7, priority=$8, category=$9
+  WHERE id=$10;
   `;
 
   const queryParams = [
@@ -76,6 +76,7 @@ export const updateItem = async (
     updatedItem.image,
     updatedItem.dateCreated,
     updatedItem.dateDue,
+    updatedItem.dateCompleted,
     updatedItem.description,
     updatedItem.isCompleted,
     updatedItem.priority,

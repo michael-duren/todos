@@ -7,6 +7,7 @@ export default interface ToDo {
   image: string;
   dateCreated: Date;
   dateDue: Date;
+  dateCompleted: Date | null | string;
   description: string;
   isCompleted: boolean;
   priority: Priority;

@@ -4,6 +4,7 @@ CREATE TABLE todos (
 	"image" VARCHAR(256),
 	"dateCreated" DATE,
 	"dateDue" DATE,
+	"dateCompleted" DATE,
 	"description" TEXT,
 	"isCompleted" boolean,
 	"priority" VARCHAR(10),

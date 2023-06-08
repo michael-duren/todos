@@ -83,7 +83,7 @@ export default function ToDoForm({
   return (
     <form onSubmit={onSubmit} className="flex h-full flex-col gap-4">
       <div className="flex my-4 justify-between">
-        <h3 className="text-xl">Add ToDo</h3>
+        <h3 className="text-xl">{isEdit ? 'Edit ToDo' : 'Add ToDo'}</h3>
         <button
           onClick={() => setIsModalOpen(false)}
           className="text-gray-600 hover:text-gray-900"
