@@ -5,8 +5,8 @@ import agent from '../api/agent';
 export interface IGeneralContext {
   isModalOpen: boolean;
   setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  todoList: ToDo[];
-  setTodoList: React.Dispatch<React.SetStateAction<ToDo[]>>;
+  unCompleteToDoList: ToDo[];
+  setUnCompleteToDoList: React.Dispatch<React.SetStateAction<ToDo[]>>;
   selectedTodo: ToDo | null;
   setSelectedTodo: React.Dispatch<React.SetStateAction<ToDo | null>>;
   completeToDoList: ToDo[];
@@ -43,8 +43,8 @@ export const GeneralContextProvider = ({ children }: Props) => {
       value={{
         isModalOpen,
         setIsModalOpen,
-        todoList: unCompleteToDoList,
-        setTodoList: setUnCompleteToDoList,
+        unCompleteToDoList,
+        setUnCompleteToDoList,
         selectedTodo,
         setSelectedTodo,
         completeToDoList,

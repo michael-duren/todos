@@ -13,7 +13,7 @@ import agent from '../api/agent';
 import { toast } from 'react-hot-toast';
 
 export default function ItemPanel() {
-  const { selectedTodo, setSelectedTodo, setTodoList } = useContext(
+  const { selectedTodo, setSelectedTodo, setUnCompleteToDoList } = useContext(
     GeneralContext
   ) as IGeneralContext;
 
@@ -30,8 +30,8 @@ export default function ItemPanel() {
       await agent.TodoItems.complete(completedTodo, completedTodo.id);
       toast.success(`${selectedTodo?.name} Completed`);
       setSelectedTodo(null);
-      const newTodoItems = await agent.TodoItems.listAll();
-      setTodoList(newTodoItems);
+      const newTodoItems = await agent.TodoItems.listUnComplete();
+      setUnCompleteToDoList(newTodoItems);
     } catch (error) {
       console.log(error);
       toast.error('Problem completing item');

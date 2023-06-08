@@ -4,7 +4,9 @@ import SmallItemCard from './SmallItemCard';
 import Dropdown from './Dropdown';
 
 export default function MainPanel() {
-  const { todoList } = useContext(GeneralContext) as IGeneralContext;
+  const { unCompleteToDoList: todoList } = useContext(
+    GeneralContext
+  ) as IGeneralContext;
   const [orderBy, setOrderBy] = useState<'dueDate' | 'priority'>('dueDate');
 
   const dropdownOptions = [

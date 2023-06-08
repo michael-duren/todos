@@ -19,7 +19,7 @@ export default function AddTodoForm() {
     category: Category.WORK,
   };
   const [formData, setFormData] = useState(initialState);
-  const { setIsModalOpen, setTodoList, setSelectedTodo } = useContext(
+  const { setIsModalOpen, setUnCompleteToDoList, setSelectedTodo } = useContext(
     GeneralContext
   ) as IGeneralContext;
 
@@ -41,8 +41,8 @@ export default function AddTodoForm() {
 
     try {
       await agent.TodoItems.create(newToDo);
-      const newToDos = await agent.TodoItems.listAll();
-      setTodoList(newToDos);
+      const newToDos = await agent.TodoItems.listUnComplete();
+      setUnCompleteToDoList(newToDos);
       setSelectedTodo(newToDos[0]);
       toast.success('ToDo added successfully');
     } catch (error) {

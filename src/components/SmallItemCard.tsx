@@ -18,9 +18,11 @@ interface Props {
 
 export default function SmallItemCard({ todo }: Props) {
   const { name, priority, dateDue, category } = todo;
-  const { todoList, setSelectedTodo, setTodoList } = useContext(
-    GeneralContext
-  ) as IGeneralContext;
+  const {
+    unCompleteToDoList: todoList,
+    setSelectedTodo,
+    setUnCompleteToDoList,
+  } = useContext(GeneralContext) as IGeneralContext;
 
   const selectItem = (id: number) => {
     const selectedItem = todoList.filter((item) => item.id === id);
@@ -44,8 +46,8 @@ export default function SmallItemCard({ todo }: Props) {
       await agent.TodoItems.complete(completedTodo, completedTodo.id);
       toast.success(`${toTitleCase(name)} Completed`);
       setSelectedTodo(null);
-      const newTodoItems = await agent.TodoItems.listAll();
-      setTodoList(newTodoItems);
+      const newTodoItems = await agent.TodoItems.listUnComplete();
+      setUnCompleteToDoList(newTodoItems);
     } catch (error) {
       console.log(error);
       toast.error('Problem completing item');
