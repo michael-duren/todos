@@ -41,6 +41,19 @@ export default function ItemPanel() {
     }
   };
 
+  const onDelete = async () => {
+    try {
+      await agent.TodoItems.delete(selectedTodo!.id);
+      toast.success(`${selectedTodo?.name} Deleted`);
+      setSelectedTodo(null);
+      const newTodoItems = await agent.TodoItems.listUnComplete();
+      setUnCompleteToDoList(newTodoItems);
+    } catch (error) {
+      console.log(error);
+      toast.error('Problem deleting item');
+    }
+  };
+
   return (
     <>
       <div className="col-span-3  flex justify-center">
@@ -107,6 +120,7 @@ export default function ItemPanel() {
                 <EditOutlinedIcon fontSize="small" />
               </button>
               <button
+                onClick={onDelete}
                 className="bg-red-500 text-xs transition-all duration-300 shadow-lg active:scale-105 
             hover:bg-opacity-100 bg-opacity-80 text-white px-4 py-2 rounded-xl"
               >

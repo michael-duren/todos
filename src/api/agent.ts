@@ -22,7 +22,7 @@ const TodoItems = {
     newItem.isCompleted = true;
     await requests.put<void>(`/api/todo/${id}`, newItem);
   },
-  delete: (id: string) => requests.del<void>(`/api/todo/${id}`),
+  delete: (id: number) => requests.del<void>(`/api/todo/${id}`),
 };
 
 const agent = {
