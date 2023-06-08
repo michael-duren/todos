@@ -5,7 +5,7 @@ import Dropdown from './Dropdown';
 
 export default function MainPanel() {
   const { todoList } = useContext(GeneralContext) as IGeneralContext;
-  const [orderBy, setOrderBy] = useState('dueDate');
+  const [orderBy, setOrderBy] = useState<'dueDate' | 'priority'>('dueDate');
 
   const dropdownOptions = [
     {
@@ -16,7 +16,7 @@ export default function MainPanel() {
     },
     {
       option: 'Priority',
-      onClick: () => setOrderBy('Priority'),
+      onClick: () => setOrderBy('priority'),
       ItemIcon: null,
       additonalStyles: `${orderBy === 'priority' ? 'text-gray-200' : 'false'}`,
     },

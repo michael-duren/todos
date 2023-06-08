@@ -8,10 +8,12 @@ export default function ItemPanel() {
 
   const buttonStyle =
     (selectedTodo && selectedTodo.priority.toLowerCase()) === 'high'
-      ? 'text-red-500 text-white'
+      ? 'text-red-500 '
       : (selectedTodo && selectedTodo.priority.toLowerCase()) === 'medium'
-      ? 'text-orange-500 text-white'
-      : 'text-blue-500 text-white';
+      ? 'text-orange-500 '
+      : 'text-blue-500 ';
+
+  console.log(buttonStyle);
 
   return (
     <>
@@ -26,7 +28,7 @@ export default function ItemPanel() {
             <h2 className="text-xl items-center flex justify-between text-gray-900">
               <span>{toTitleCase(selectedTodo?.name)}</span>
               <span>
-                <SportsScoreOutlinedIcon className={buttonStyle} />
+                <SportsScoreOutlinedIcon className={`${buttonStyle}`} />
               </span>
             </h2>
             <p className="text-sm">{selectedTodo.description}</p>

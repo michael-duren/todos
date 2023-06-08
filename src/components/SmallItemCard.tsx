@@ -58,7 +58,9 @@ export default function SmallItemCard({ todo }: Props) {
             </h4>
           </div>
           <div className="flex gap-2 items-center">
-            <div className="text-sm">Due: {dayjs(dateDue).fromNow()}</div>
+            <div className="text-sm text-gray-500">
+              <i>Due {dayjs(dateDue).fromNow()}</i>
+            </div>
             <CategoryIcon category={category} styles="text-gray-500" />
           </div>
         </div>
