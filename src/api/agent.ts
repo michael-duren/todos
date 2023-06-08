@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from 'axios';
-import ToDo, { FormToDo } from '../models/todo';
+import ToDo, { EditFormToDo, FormToDo } from '../models/todo';
 
 const getData = <T>(response: AxiosResponse<T>) => response.data;
 
@@ -16,7 +16,7 @@ const TodoItems = {
   listUnComplete: () => requests.get<ToDo[]>('/api/todo/uncomplete'),
   single: (id: string) => requests.get<ToDo>(`/api/todo/${id}`),
   create: (newItem: FormToDo) => requests.post<void>('/api/todo', newItem),
-  edit: (newItem: ToDo, id: number) =>
+  edit: (newItem: EditFormToDo | FormToDo, id: number) =>
     requests.put<void>(`/api/todo/${id}`, newItem),
   complete: async (newItem: ToDo, id: number) => {
     newItem.isCompleted = true;

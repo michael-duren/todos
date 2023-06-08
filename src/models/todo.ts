@@ -23,3 +23,15 @@ export interface FormToDo {
   priority: string;
   category: string;
 }
+
+export interface EditFormToDo {
+  id: number;
+  name: string;
+  image: string;
+  dateCreated: string;
+  dateDue: string;
+  description: string;
+  isCompleted: boolean;
+  priority: string;
+  category: string;
+}

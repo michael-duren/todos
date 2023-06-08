@@ -1,14 +1,19 @@
 import CloseIcon from '@mui/icons-material/Close';
 import { Category } from '../models/category';
-import { Fragment, useContext, useState } from 'react';
+import { useContext, useState } from 'react';
 import { GeneralContext, IGeneralContext } from '../context/GeneralContext';
 import { Priority } from '../models/priority';
-import { FormToDo } from '../models/todo';
+import { EditFormToDo, FormToDo } from '../models/todo';
 import agent from '../api/agent';
 import { toast } from 'react-hot-toast';
 
-export default function AddTodoForm() {
-  const initialState: FormToDo = {
+interface Props {
+  editedTodo?: EditFormToDo;
+  isEdit: boolean;
+}
+
+export default function ToDoForm({ editedTodo, isEdit }: Props) {
+  const initialState = editedTodo ?? {
     name: '',
     image: '',
     dateCreated: '',
@@ -18,7 +23,9 @@ export default function AddTodoForm() {
     priority: Priority.HIGH,
     category: Category.WORK,
   };
-  const [formData, setFormData] = useState(initialState);
+  const [formData, setFormData] = useState<FormToDo | EditFormToDo>(
+    initialState
+  );
   const { setIsModalOpen, setUnCompleteToDoList, setSelectedTodo } = useContext(
     GeneralContext
   ) as IGeneralContext;
@@ -35,26 +42,36 @@ export default function AddTodoForm() {
 
   const onSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    const newToDo = { ...formData, dateCreated: new Date().toISOString() };
-    setFormData(initialState);
-    setIsModalOpen(false);
+    if (!isEdit) {
+      const newToDo = { ...formData, dateCreated: new Date().toISOString() };
+      setFormData(initialState);
+      setIsModalOpen(false);
 
-    try {
-      await agent.TodoItems.create(newToDo);
-      const newToDos = await agent.TodoItems.listUnComplete();
-      setUnCompleteToDoList(newToDos);
-      setSelectedTodo(newToDos[0]);
-      toast.success('ToDo added successfully');
-    } catch (error) {
-      console.log(error);
-      toast.error('Error adding ToDo');
+      try {
+        await agent.TodoItems.create(newToDo);
+        const newToDos = await agent.TodoItems.listUnComplete();
+        setUnCompleteToDoList(newToDos);
+        setSelectedTodo(newToDos[0]);
+        toast.success('ToDo added successfully');
+      } catch (error) {
+        console.log(error);
+        toast.error('Error adding ToDo');
+      }
+    }
+
+    if (isEdit) {
+      setIsModalOpen(false);
+      try {
+        await agent.TodoItems.edit(formData, editedTodo!.id);
+        const newToDos = await agent.TodoItems.listUnComplete();
+        setUnCompleteToDoList(newToDos);
+        setSelectedTodo(newToDos[0]);
+        toast.success('ToDo updated successfully');
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
-
-  const inputs = [
-    { placeholder: 'Name', name: 'name' },
-    { placeholder: 'ImageURL', name: 'image' },
-  ];
 
   return (
     <form onSubmit={onSubmit} className="flex h-full flex-col gap-4">
@@ -68,27 +85,26 @@ export default function AddTodoForm() {
         </button>
       </div>
       <div className="flex mx-8 flex-col">
-        {inputs.map((input) => {
-          const key = input.name as keyof FormToDo;
-          const value = formData[key];
-
-          return (
-            <Fragment key={input.name}>
-              <label key={input.name} htmlFor={input.name}>
-                {input.placeholder}
-              </label>
-              <input
-                required
-                onChange={onChange}
-                value={value.toString()}
-                type="text"
-                className="my-4 p-2 border-2 rounded-xl"
-                placeholder={input.placeholder}
-                name={input.name}
-              />
-            </Fragment>
-          );
-        })}
+        <label htmlFor="Name">Name</label>
+        <input
+          required
+          onChange={onChange}
+          value={formData.name}
+          type="text"
+          className="my-4 p-2 border-2 rounded-xl"
+          placeholder="Name"
+          name="name"
+        />
+        <label htmlFor="ImageURL">ImageURL</label>
+        <input
+          required
+          onChange={onChange}
+          value={formData.image}
+          type="text"
+          className="my-4 p-2 border-2 rounded-xl"
+          placeholder="ImageURL"
+          name="image"
+        />
         <label htmlFor="description">Description</label>
         <textarea
           required

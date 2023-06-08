@@ -1,4 +1,4 @@
-import AddTodoForm from './components/AddTodoForm';
+import ToDoForm from './components/ToDoForm';
 import AvatarPanel from './components/AvatarPanel';
 import ItemPanel from './components/ItemPanel';
 import Layout from './components/Layout';
@@ -14,7 +14,7 @@ function App() {
         <ItemPanel />
       </Layout>
       <Modal>
-        <AddTodoForm />
+        <ToDoForm isEdit={false} />
       </Modal>
     </>
   );
