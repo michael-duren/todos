@@ -1,23 +1,59 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { GeneralContext, IGeneralContext } from '../context/GeneralContext';
 import SmallItemCard from './SmallItemCard';
 import Dropdown from './Dropdown';
 
 export default function MainPanel() {
   const { todoList } = useContext(GeneralContext) as IGeneralContext;
+  const [orderBy, setOrderBy] = useState('dueDate');
 
   const dropdownOptions = [
     {
       option: 'Due Date',
-      onClick: () => console.log('Due Date'),
+      onClick: () => setOrderBy('dueDate'),
       ItemIcon: null,
+      additonalStyles: `${orderBy === 'dueDate' ? 'text-red-900' : 'false'}`,
     },
     {
       option: 'Priority',
-      onClick: () => console.log('Priority'),
+      onClick: () => setOrderBy('Priority'),
       ItemIcon: null,
+      additonalStyles: `${orderBy === 'priority' ? 'text-gray-200' : 'false'}`,
     },
   ];
+
+  const orderedByDate = [...todoList].sort((a, b) => {
+    const dateA = new Date(a.dateDue);
+    const dateB = new Date(b.dateDue);
+
+    return dateA.getTime() - dateB.getTime();
+  });
+
+  const orderByPriority = [...todoList].sort((a, b) => {
+    const priorityA =
+      a.priority.toLowerCase() === 'high'
+        ? 1
+        : a.priority.toLowerCase() === 'medium'
+        ? 2
+        : 3;
+    const priorityB =
+      b.priority.toLowerCase() === 'high'
+        ? 1
+        : b.priority.toLowerCase() === 'medium'
+        ? 2
+        : 3;
+
+    if (priorityA < priorityB) {
+      return -1;
+    }
+
+    if (priorityA > priorityB) {
+      return 1;
+    }
+
+    return 0;
+  });
+  console.log(orderBy);
 
   return (
     <div className="h-full w-full">
@@ -28,13 +64,21 @@ export default function MainPanel() {
         <Dropdown invert title="Order By" items={dropdownOptions} />
       </div>
       <ul>
-        {todoList.map((todo) => {
-          return (
-            <li key={todo.id}>
-              <SmallItemCard todo={todo} />
-            </li>
-          );
-        })}
+        {orderBy === 'dueDate'
+          ? orderedByDate.map((todo) => {
+              return (
+                <li key={todo.id}>
+                  <SmallItemCard todo={todo} />
+                </li>
+              );
+            })
+          : orderByPriority.map((todo) => {
+              return (
+                <li key={todo.id}>
+                  <SmallItemCard todo={todo} />
+                </li>
+              );
+            })}
       </ul>
     </div>
   );

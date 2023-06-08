@@ -4,6 +4,9 @@ import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import { toTitleCase } from '../utils/toTitleCase';
 import CategoryIcon from './CategoryIcon';
 import { isItemDue } from '../utils/isItemDo';
+import dayjs from 'dayjs';
+import realtiveTime from 'dayjs/plugin/relativeTime';
+dayjs.extend(realtiveTime);
 
 interface Props {
   todo: ToDo;
@@ -37,11 +40,12 @@ export default function SmallItemCard({ todo }: Props) {
                 className={`group-hover:visible invisible rounded-full bg-opacity-70 hover:bg-opacity-100 ${buttonStyle}`}
               />
             </button>
-            <h4 className="text-gray-700 hover:text-gray-900 cursor-pointer">
+            <h4 className="text-gray-700 font-semibold hover:text-gray-900 hover:font-bold cursor-pointer">
               {toTitleCase(name)}
             </h4>
           </div>
-          <div>
+          <div className="flex gap-2 items-center">
+            <div className="text-sm">Due: {dayjs(dateDue).fromNow()}</div>
             <CategoryIcon category={category} styles="text-gray-500" />
           </div>
         </div>

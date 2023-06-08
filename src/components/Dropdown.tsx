@@ -12,6 +12,7 @@ interface Item {
         muiName: string;
       })
     | null;
+  additionalStyles?: string;
 }
 
 interface DropdownProps {
@@ -53,8 +54,7 @@ export default function Dropdown({ items, title, invert }: DropdownProps) {
           leaveTo="transform opacity-0 scale-95"
         >
           <Menu.Items className="absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-            {items.map(({ option, onClick, ItemIcon }, i) => {
-              console.log(option);
+            {items.map(({ option, onClick, ItemIcon, additionalStyles }, i) => {
               return (
                 <div key={option} className="px-1 py-1 ">
                   <Menu.Item>
@@ -63,8 +63,8 @@ export default function Dropdown({ items, title, invert }: DropdownProps) {
                         key={i}
                         onClick={onClick}
                         className={`${
-                          active ? 'bg-gray-300 bg-opacity-50' : 'text-gray-900'
-                        } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
+                          active ? 'bg-gray-300 bg-opacity-50' : ''
+                        } ${additionalStyles} group flex w-full items-center rounded-md px-2 py-2 text-sm`}
                       >
                         {ItemIcon !== null &&
                           (active ? (
@@ -72,7 +72,7 @@ export default function Dropdown({ items, title, invert }: DropdownProps) {
                           ) : (
                             <ItemIcon className="mr-1" />
                           ))}
-                        {option}
+                        <span className={`${additionalStyles}`}>{option}</span>
                       </button>
                     )}
                   </Menu.Item>
