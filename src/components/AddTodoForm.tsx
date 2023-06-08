@@ -41,7 +41,7 @@ export default function AddTodoForm() {
 
     try {
       await agent.TodoItems.create(newToDo);
-      const newToDos = await agent.TodoItems.list();
+      const newToDos = await agent.TodoItems.listAll();
       setTodoList(newToDos);
       setSelectedTodo(newToDos[0]);
       toast.success('ToDo added successfully');

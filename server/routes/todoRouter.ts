@@ -5,6 +5,7 @@ import {
   deleteItem,
   getCompletedItems,
   getItems,
+  getUncompletedItems,
   updateItem,
 } from '../querries/todoQuerries.ts';
 
@@ -33,7 +34,7 @@ todoRouter.get('/complete', async (_, res) => {
 // GET ONLY UNCOMPLETE ITEMS
 todoRouter.get('/uncomplete', async (_, res) => {
   try {
-    const items = await getCompletedItems();
+    const items = await getUncompletedItems();
     res.send(items);
   } catch (error: any) {
     console.error(error);

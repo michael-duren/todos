@@ -30,7 +30,7 @@ export default function ItemPanel() {
       await agent.TodoItems.complete(completedTodo, completedTodo.id);
       toast.success(`${selectedTodo?.name} Completed`);
       setSelectedTodo(null);
-      const newTodoItems = await agent.TodoItems.list();
+      const newTodoItems = await agent.TodoItems.listAll();
       setTodoList(newTodoItems);
     } catch (error) {
       console.log(error);

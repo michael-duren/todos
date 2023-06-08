@@ -11,7 +11,9 @@ const requests = {
 };
 
 const TodoItems = {
-  list: () => requests.get<ToDo[]>('/api/todo'),
+  listAll: () => requests.get<ToDo[]>('/api/todo'),
+  listComplete: () => requests.get<ToDo[]>('/api/todo/complete'),
+  listUnComplete: () => requests.get<ToDo[]>('/api/todo/uncomplete'),
   single: (id: string) => requests.get<ToDo>(`/api/todo/${id}`),
   create: (newItem: FormToDo) => requests.post<void>('/api/todo', newItem),
   edit: (newItem: ToDo, id: number) =>

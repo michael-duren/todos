@@ -19,13 +19,13 @@ interface Props {
 
 export const GeneralContextProvider = ({ children }: Props) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [todoList, setTodoList] = useState<ToDo[]>([]);
+  const [unCompleteToDoList, setUnCompleteToDoList] = useState<ToDo[]>([]);
   const [selectedTodo, setSelectedTodo] = useState<ToDo | null>(null);
 
   useEffect(() => {
-    agent.TodoItems.list()
+    agent.TodoItems.listUnComplete()
       .then((items) => {
-        setTodoList(items);
+        setUnCompleteToDoList(items);
         setSelectedTodo(items[0]);
       })
       .catch((error) => console.error(error));
@@ -36,8 +36,8 @@ export const GeneralContextProvider = ({ children }: Props) => {
       value={{
         isModalOpen,
         setIsModalOpen,
-        todoList,
-        setTodoList,
+        todoList: unCompleteToDoList,
+        setTodoList: setUnCompleteToDoList,
         selectedTodo,
         setSelectedTodo,
       }}

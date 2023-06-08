@@ -44,7 +44,7 @@ export default function SmallItemCard({ todo }: Props) {
       await agent.TodoItems.complete(completedTodo, completedTodo.id);
       toast.success(`${toTitleCase(name)} Completed`);
       setSelectedTodo(null);
-      const newTodoItems = await agent.TodoItems.list();
+      const newTodoItems = await agent.TodoItems.listAll();
       setTodoList(newTodoItems);
     } catch (error) {
       console.log(error);
