@@ -16,9 +16,9 @@ export default function ItemPanel() {
   return (
     <>
       {selectedTodo && (
-        <div className="h-full border-2 p-2 rounded-xl shadow-lg text-gray-700 m-8 w-full">
+        <div className="h-full flex flex-col items-center  p-2 rounded-xl shadow-lg text-gray-700 m-8 w-full">
           <img
-            className="rounded-xl"
+            className="rounded-xl w-60 h-60 object-contain"
             src={selectedTodo.image}
             alt={selectedTodo.name}
           />

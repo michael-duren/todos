@@ -39,7 +39,7 @@ export default function SmallItemCard({ todo }: Props) {
     <>
       {!isCompleted && (
         <div
-          className={`flex ${itemUrgency} my-8 justify-between items-center border-2 p-4 rounded-xl`}
+          className={`flex ${itemUrgency} my-8 shadow-lg justify-between items-center  p-4 rounded-xl`}
         >
           <div className="flex">
             <button className="group w-20 flex items-center">
