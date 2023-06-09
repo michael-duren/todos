@@ -1,6 +1,6 @@
 import { useContext, useState } from 'react';
 import { GeneralContext, IGeneralContext } from '../context/GeneralContext';
-import SmallItemCard from './SmallItemCard';
+import ToDoCardUnComplete from './ToDoCardUnComplete';
 import Listbox from './Listbox';
 import { sortBy } from '../utils/sort';
 
@@ -28,7 +28,7 @@ export default function MainPanel() {
           {sortedTodos.map((todo) => {
             return (
               <li key={todo.id}>
-                <SmallItemCard todo={todo} />
+                <ToDoCardUnComplete todo={todo} />
               </li>
             );
           })}

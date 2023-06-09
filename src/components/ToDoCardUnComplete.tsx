@@ -16,7 +16,7 @@ interface Props {
   todo: ToDo;
 }
 
-export default function SmallItemCard({ todo }: Props) {
+export default function ToDoCardUnComplete({ todo }: Props) {
   const { name, priority, dateDue, category } = todo;
   const {
     unCompleteToDoList: todoList,

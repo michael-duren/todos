@@ -1,6 +1,6 @@
 import ToDo from '../models/todo';
 
-export const orderByDate = (todoList: ToDo[]) => {
+export const orderByDate = (todoList: ToDo[]): ToDo[] => {
   return [...todoList].sort((a, b) => {
     const dateA = new Date(a.dateDue);
     const dateB = new Date(b.dateDue);
@@ -9,7 +9,7 @@ export const orderByDate = (todoList: ToDo[]) => {
   });
 };
 
-export const orderByPriority = (todoList: ToDo[]) => {
+export const orderByPriority = (todoList: ToDo[]): ToDo[] => {
   return [...todoList].sort((a, b) => {
     const priorityA =
       a.priority.toLowerCase() === 'high'
@@ -28,7 +28,7 @@ export const orderByPriority = (todoList: ToDo[]) => {
   });
 };
 
-export const orderByCategory = (todoList: ToDo[]) => {
+export const orderByCategory = (todoList: ToDo[]): ToDo[] => {
   return [...todoList].sort((a, b) => a.category.localeCompare(b.category));
 };
 
