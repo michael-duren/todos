@@ -56,7 +56,10 @@ export default function ToDoForm({
         await agent.TodoItems.create(newToDo);
         const newToDos = await agent.TodoItems.listUnComplete();
         setUnCompleteToDoList(newToDos);
-        setSelectedTodo(newToDos[0]);
+        const addedToDo = newToDos.filter(
+          (todo) => newToDo.name === todo.name
+        )[0];
+        setSelectedTodo(addedToDo);
         toast.success('ToDo added successfully');
       } catch (error) {
         console.log(error);
@@ -70,7 +73,10 @@ export default function ToDoForm({
         await agent.TodoItems.edit(formData, editedTodo!.id);
         const newToDos = await agent.TodoItems.listUnComplete();
         setUnCompleteToDoList(newToDos);
-        setSelectedTodo(newToDos[0]);
+        const updatedItem = newToDos.filter(
+          (item) => item.id === editedTodo!.id
+        )[0];
+        setSelectedTodo(updatedItem);
         toast.success(`${toTitleCase(formData.name)} updated successfully`);
       } catch (error) {
         console.log(error);
