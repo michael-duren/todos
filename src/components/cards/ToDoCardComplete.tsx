@@ -1,8 +1,8 @@
-import { toTitleCase } from '../utils/toTitleCase';
+import { toTitleCase } from '../../utils/toTitleCase';
 import CheckOutlinedIcon from '@mui/icons-material/CheckOutlined';
-import CategoryIcon from './CategoryIcon';
+import CategoryIcon from '../ui/CategoryIcon';
 import dayjs from 'dayjs';
-import ToDo from '../models/todo';
+import ToDo from '../../models/todo';
 
 export default function ToDoCardComplete({ todo }: { todo: ToDo }) {
   const { id, name, category, dateCompleted } = todo;

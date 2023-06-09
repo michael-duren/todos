@@ -1,15 +1,15 @@
-import ToDo from '../models/todo';
+import ToDo from '../../models/todo';
 import PanoramaFishEyeIcon from '@mui/icons-material/PanoramaFishEye';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
-import { toTitleCase } from '../utils/toTitleCase';
-import CategoryIcon from './CategoryIcon';
-import { isItemDue } from '../utils/isItemDo';
+import { toTitleCase } from '../../utils/toTitleCase';
+import CategoryIcon from '../ui/CategoryIcon';
+import { isItemDue } from '../../utils/isItemDo';
 import dayjs from 'dayjs';
 import realtiveTime from 'dayjs/plugin/relativeTime';
 import { useContext } from 'react';
-import { GeneralContext, IGeneralContext } from '../context/GeneralContext';
+import { GeneralContext, IGeneralContext } from '../../context/GeneralContext';
 import toast from 'react-hot-toast';
-import agent from '../api/agent';
+import agent from '../../api/agent';
 dayjs.extend(realtiveTime);
 
 interface Props {

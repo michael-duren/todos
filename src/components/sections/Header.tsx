@@ -1,10 +1,10 @@
 import AssignmentTurnedInIcon from '@mui/icons-material/AssignmentTurnedIn';
-import Dropdown from './Dropdown';
+import Dropdown from '../ui/Dropdown';
 import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOutlined';
 import { useContext } from 'react';
-import { GeneralContext, IGeneralContext } from '../context/GeneralContext';
-import Modal from './Modal';
-import ToDoForm from './ToDoForm';
+import { GeneralContext, IGeneralContext } from '../../context/GeneralContext';
+import Modal from '../ui/Modal';
+import ToDoForm from '../forms/ToDoForm';
 
 export default function Header() {
   const { isModalOpen, setIsModalOpen } = useContext(

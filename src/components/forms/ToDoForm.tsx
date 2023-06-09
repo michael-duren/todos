@@ -1,12 +1,12 @@
 import CloseIcon from '@mui/icons-material/Close';
-import { Category } from '../models/category';
+import { Category } from '../../models/category';
 import { useContext, useState } from 'react';
-import { GeneralContext, IGeneralContext } from '../context/GeneralContext';
-import { Priority } from '../models/priority';
-import { EditFormToDo, FormToDo } from '../models/todo';
-import agent from '../api/agent';
+import { GeneralContext, IGeneralContext } from '../../context/GeneralContext';
+import { Priority } from '../../models/priority';
+import { EditFormToDo, FormToDo } from '../../models/todo';
+import agent from '../../api/agent';
 import { toast } from 'react-hot-toast';
-import { toTitleCase } from '../utils/toTitleCase';
+import { toTitleCase } from '../../utils/toTitleCase';
 
 interface Props {
   editedTodo?: EditFormToDo;

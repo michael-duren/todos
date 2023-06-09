@@ -1,6 +1,6 @@
 import { Fragment, useContext } from 'react';
-import { GeneralContext, IGeneralContext } from '../context/GeneralContext';
-import ToDoCardComplete from './ToDoCardComplete';
+import { GeneralContext, IGeneralContext } from '../../context/GeneralContext';
+import ToDoCardComplete from '../cards/ToDoCardComplete';
 
 export default function AvatarPanel() {
   const { completeToDoList } = useContext(GeneralContext) as IGeneralContext;

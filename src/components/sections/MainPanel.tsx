@@ -1,8 +1,8 @@
 import { useContext, useState } from 'react';
-import { GeneralContext, IGeneralContext } from '../context/GeneralContext';
-import ToDoCardUnComplete from './ToDoCardUnComplete';
-import Listbox from './Listbox';
-import { sortBy } from '../utils/sort';
+import { GeneralContext, IGeneralContext } from '../../context/GeneralContext';
+import ToDoCardUnComplete from '../cards/ToDoCardUnComplete';
+import Listbox from '../ui/Listbox';
+import { sortBy } from '../../utils/sort';
 
 export default function MainPanel() {
   const { unCompleteToDoList } = useContext(GeneralContext) as IGeneralContext;

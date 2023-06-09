@@ -1,7 +1,7 @@
-import AvatarPanel from './components/AvatarPanel';
-import ItemPanel from './components/ItemPanel';
-import Layout from './components/Layout';
-import MainPanel from './components/MainPanel';
+import AvatarPanel from './components/sections/AvatarPanel';
+import ItemPanel from './components/sections/ItemPanel';
+import Layout from './components/layout/Layout';
+import MainPanel from './components/sections/MainPanel';
 
 function App() {
   return (

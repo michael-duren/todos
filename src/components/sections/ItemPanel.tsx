@@ -1,6 +1,6 @@
 import { useContext, useState } from 'react';
-import { GeneralContext, IGeneralContext } from '../context/GeneralContext';
-import { toTitleCase } from '../utils/toTitleCase';
+import { GeneralContext, IGeneralContext } from '../../context/GeneralContext';
+import { toTitleCase } from '../../utils/toTitleCase';
 import SportsScoreOutlinedIcon from '@mui/icons-material/SportsScoreOutlined';
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
 import CategoryOutlinedIcon from '@mui/icons-material/CategoryOutlined';
@@ -8,11 +8,11 @@ import CheckOutlinedIcon from '@mui/icons-material/CheckOutlined';
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 import dayjs from 'dayjs';
-import { isItemDue } from '../utils/isItemDo';
-import agent from '../api/agent';
+import { isItemDue } from '../../utils/isItemDo';
+import agent from '../../api/agent';
 import { toast } from 'react-hot-toast';
-import Modal from './Modal';
-import ToDoForm from './ToDoForm';
+import Modal from '../ui/Modal';
+import ToDoForm from '../forms/ToDoForm';
 
 export default function ItemPanel() {
   const {

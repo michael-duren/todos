@@ -1,4 +1,4 @@
-import { Category } from '../models/category';
+import { Category } from '../../models/category';
 import WorkOutlineIcon from '@mui/icons-material/WorkOutline';
 import SchoolOutlinedIcon from '@mui/icons-material/SchoolOutlined';
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
@@ -6,7 +6,7 @@ import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlin
 import CottageOutlinedIcon from '@mui/icons-material/CottageOutlined';
 import Diversity3OutlinedIcon from '@mui/icons-material/Diversity3Outlined';
 import DirectionsRunOutlinedIcon from '@mui/icons-material/DirectionsRunOutlined';
-import { toTitleCase } from '../utils/toTitleCase';
+import { toTitleCase } from '../../utils/toTitleCase';
 
 interface Props {
   category: Category;
