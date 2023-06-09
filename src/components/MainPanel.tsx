@@ -7,8 +7,10 @@ export default function MainPanel() {
   const { unCompleteToDoList: todoList } = useContext(
     GeneralContext
   ) as IGeneralContext;
-  const [orderBy, setOrderBy] = useState<'Due Date' | 'Priority'>('Due Date');
-  const orderOptions = ['Due Date', 'Priority'];
+  const [orderBy, setOrderBy] = useState<'Due Date' | 'Priority' | 'Category'>(
+    'Due Date'
+  );
+  const orderOptions = ['Due Date', 'Priority', 'Category'];
 
   const orderedByDate = [...todoList].sort((a, b) => {
     const dateA = new Date(a.dateDue);
@@ -31,17 +33,12 @@ export default function MainPanel() {
         ? 2
         : 3;
 
-    if (priorityA < priorityB) {
-      return -1;
-    }
-
-    if (priorityA > priorityB) {
-      return 1;
-    }
-
-    return 0;
+    return priorityA < priorityB ? -1 : priorityA > priorityB ? 1 : 0;
   });
-  console.log(orderBy);
+
+  const orderByCategory = [...todoList].sort((a, b) => {
+    return a.category.localeCompare(b.category);
+  });
 
   return (
     <div className="col-span-6 flex justify-center">
@@ -65,7 +62,15 @@ export default function MainPanel() {
                   </li>
                 );
               })
-            : orderByPriority.map((todo) => {
+            : orderBy === 'Priority'
+            ? orderByPriority.map((todo) => {
+                return (
+                  <li key={todo.id}>
+                    <SmallItemCard todo={todo} />
+                  </li>
+                );
+              })
+            : orderByCategory.map((todo) => {
                 return (
                   <li key={todo.id}>
                     <SmallItemCard todo={todo} />

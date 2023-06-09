@@ -22,9 +22,12 @@ export default function AvatarPanel() {
         <div className="m-8 rounded-xl bg-gray-50 shadow-lg p-4">
           <h4 className="text-xl">Completed:</h4>
           {completeToDoList.map((todo) => {
-            const { name, category, dateCompleted } = todo;
+            const { id, name, category, dateCompleted } = todo;
             return (
-              <div className="w-64 my-8 bg-white shadow-sm p-4 rounded-xl">
+              <div
+                key={id}
+                className="w-64 my-8 bg-white shadow-sm p-4 rounded-xl"
+              >
                 <div className={`flex  justify-between mb-2 items-center  `}>
                   <div className="flex">
                     <div className="flex items-center gap-2">

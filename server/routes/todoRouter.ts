@@ -45,7 +45,6 @@ todoRouter.get('/uncomplete', async (_, res) => {
 // POST
 todoRouter.post('/', async (req, res) => {
   const newTodo = req.body;
-  console.log(newTodo);
   try {
     await createItem(newTodo);
     res.sendStatus(201);

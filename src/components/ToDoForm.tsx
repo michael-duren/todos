@@ -43,7 +43,6 @@ export default function ToDoForm({
   ) => {
     const { name, value } = event.target;
     setFormData({ ...formData, [name]: value });
-    console.log(formData);
   };
 
   const onSubmit = async (event: React.FormEvent) => {
@@ -67,7 +66,6 @@ export default function ToDoForm({
 
     if (isEdit) {
       setIsModalOpen(false);
-      console.log('EDITING');
       try {
         await agent.TodoItems.edit(formData, editedTodo!.id);
         const newToDos = await agent.TodoItems.listUnComplete();

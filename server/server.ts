@@ -1,5 +1,4 @@
 import express from 'express';
-// import ViteExpress from 'vite-express';
 const app = express();
 import todoRouter from './routes/todoRouter.ts';
 const PORT = Number(process.env.PORT) || 5000;
@@ -19,7 +18,3 @@ app.use('/api/todo', todoRouter);
 app.listen(PORT, () => {
   console.log('Listening on port: ', PORT);
 });
-
-// ViteExpress.listen(app, PORT, () => {
-//   console.log('Listening on port: ', PORT);
-// });
