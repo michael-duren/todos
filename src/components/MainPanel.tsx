@@ -1,28 +1,14 @@
 import { useContext, useState } from 'react';
 import { GeneralContext, IGeneralContext } from '../context/GeneralContext';
 import SmallItemCard from './SmallItemCard';
-import Dropdown from './Dropdown';
+import Listbox from './Listbox';
 
 export default function MainPanel() {
   const { unCompleteToDoList: todoList } = useContext(
     GeneralContext
   ) as IGeneralContext;
-  const [orderBy, setOrderBy] = useState<'dueDate' | 'priority'>('dueDate');
-
-  const dropdownOptions = [
-    {
-      option: 'Due Date',
-      onClick: () => setOrderBy('dueDate'),
-      ItemIcon: null,
-      additonalStyles: `${orderBy === 'dueDate' ? 'text-red-900' : 'false'}`,
-    },
-    {
-      option: 'Priority',
-      onClick: () => setOrderBy('priority'),
-      ItemIcon: null,
-      additonalStyles: `${orderBy === 'priority' ? 'text-gray-200' : 'false'}`,
-    },
-  ];
+  const [orderBy, setOrderBy] = useState<'Due Date' | 'Priority'>('Due Date');
+  const orderOptions = ['Due Date', 'Priority'];
 
   const orderedByDate = [...todoList].sort((a, b) => {
     const dateA = new Date(a.dateDue);
@@ -64,10 +50,14 @@ export default function MainPanel() {
           <div>
             <h2 className="text-2xl">To Do:</h2>
           </div>
-          <Dropdown invert title="Order By" items={dropdownOptions} />
+          <Listbox
+            orderOptions={orderOptions}
+            orderBy={orderBy}
+            setOrderBy={setOrderBy}
+          />
         </div>
         <ul>
-          {orderBy === 'dueDate'
+          {orderBy === 'Due Date'
             ? orderedByDate.map((todo) => {
                 return (
                   <li key={todo.id}>
