@@ -8,6 +8,7 @@ import { GeneralContext, IGeneralContext } from '../../context/GeneralContext';
 import Modal from '../ui/Modal';
 import ToDoForm from '../forms/ToDoForm';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
+import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
 
 export default function Header() {
   const {
@@ -31,9 +32,9 @@ export default function Header() {
       ItemIcon: lateView ? RadioButtonCheckedIcon : RadioButtonUncheckedIcon,
     },
     {
-      option: 'Dark Mode',
+      option: darkMode ? 'Light Mode' : 'Dark Mode',
       onClick: () => setDarkMode(!darkMode),
-      ItemIcon: DarkModeIcon,
+      ItemIcon: darkMode ? DarkModeOutlinedIcon : DarkModeIcon,
     },
   ];
 
