@@ -23,6 +23,7 @@ export default function ToDoCardUnComplete({ todo }: Props) {
     setSelectedTodo,
     setUnCompleteToDoList,
     setCompleteToDoList,
+    lateView,
   } = useContext(GeneralContext) as IGeneralContext;
 
   const selectItem = (id: number) => {
@@ -37,9 +38,10 @@ export default function ToDoCardUnComplete({ todo }: Props) {
       ? 'bg-orange-500 text-white'
       : 'bg-blue-500 text-white';
 
-  const itemUrgency = isItemDue(new Date(dateDue))
-    ? 'bg-red-500 bg-opacity-20'
-    : 'bg-white';
+  const itemUrgency =
+    isItemDue(new Date(dateDue)) && lateView
+      ? 'bg-red-500 bg-opacity-20'
+      : 'bg-white';
 
   const onComplete = async () => {
     try {

@@ -1,8 +1,9 @@
 import { Menu, Transition } from '@headlessui/react';
-import { Fragment } from 'react';
+import { Fragment, useContext } from 'react';
 import ExpandMoreOutlinedIcon from '@mui/icons-material/ExpandMoreOutlined';
 import { OverridableComponent } from '@mui/material/OverridableComponent';
 import { SvgIconTypeMap } from '@mui/material';
+import { GeneralContext, IGeneralContext } from '../../context/GeneralContext';
 
 interface Item {
   option: string;
@@ -22,9 +23,11 @@ interface DropdownProps {
 }
 
 export default function Dropdown({ items, title, invert }: DropdownProps) {
-  const invertedButton = invert
-    ? ' bg-white text-black focus-visible:ring-black '
-    : ' bg-black text-white focus-visible:ring-white ';
+  const { darkMode } = useContext(GeneralContext) as IGeneralContext;
+  const invertedButton =
+    invert || darkMode
+      ? ' bg-white text-black focus-visible:ring-black '
+      : ' bg-black text-white focus-visible:ring-white ';
 
   return (
     <div>
@@ -36,7 +39,7 @@ export default function Dropdown({ items, title, invert }: DropdownProps) {
             {title}
             <ExpandMoreOutlinedIcon
               className={`ml-2 -mr-1 h-5 w-5 ${
-                invert
+                darkMode
                   ? 'text-gray-900 hover:text-gray-700'
                   : 'text-white hover:text-white'
               } `}
@@ -53,7 +56,11 @@ export default function Dropdown({ items, title, invert }: DropdownProps) {
           leaveFrom="transform opacity-100 scale-100"
           leaveTo="transform opacity-0 scale-95"
         >
-          <Menu.Items className="absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+          <Menu.Items
+            className={`absolute right-0 mt-2 w-56 origin-top-right divide-y 
+            divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black
+            ring-opacity-5 focus:outline-none`}
+          >
             {items.map(({ option, onClick, ItemIcon, additionalStyles }, i) => {
               return (
                 <div key={option} className="px-1 py-1 ">

@@ -11,6 +11,10 @@ export interface IGeneralContext {
   setSelectedTodo: React.Dispatch<React.SetStateAction<ToDo | null>>;
   completeToDoList: ToDo[];
   setCompleteToDoList: React.Dispatch<React.SetStateAction<ToDo[]>>;
+  lateView: boolean;
+  setLateView: React.Dispatch<React.SetStateAction<boolean>>;
+  darkMode: boolean;
+  setDarkMode: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export const GeneralContext = createContext<IGeneralContext | null>(null);
@@ -24,6 +28,8 @@ export const GeneralContextProvider = ({ children }: Props) => {
   const [unCompleteToDoList, setUnCompleteToDoList] = useState<ToDo[]>([]);
   const [completeToDoList, setCompleteToDoList] = useState<ToDo[]>([]);
   const [selectedTodo, setSelectedTodo] = useState<ToDo | null>(null);
+  const [lateView, setLateView] = useState(false);
+  const [darkMode, setDarkMode] = useState(false);
 
   useEffect(() => {
     agent.TodoItems.listUnComplete()
@@ -49,6 +55,10 @@ export const GeneralContextProvider = ({ children }: Props) => {
         setSelectedTodo,
         completeToDoList,
         setCompleteToDoList,
+        lateView,
+        setLateView,
+        darkMode,
+        setDarkMode,
       }}
     >
       {children}

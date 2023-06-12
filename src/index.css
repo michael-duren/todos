@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.shadow-lg-white {
+  box-shadow: 0 10px 15px -3px rgb(255 255 255 / 0.15),
+    0 4px 6px -4px rgb(255 255 255 / 0.15);
+}
+
+.temporary-bounce {
+  -webkit-animation-iteration-count: 1;
+  animation-iteration-count: 1;
+}
