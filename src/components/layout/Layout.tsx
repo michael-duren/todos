@@ -12,7 +12,7 @@ export default function Layout({ children }: Props) {
   return (
     <div
       className={`h-full w-full ${
-        darkMode ? 'bg-gray-950' : ''
+        darkMode ? 'bg-gradient' : ''
       } min-h-[100vh] p-8`}
     >
       <Header />

@@ -145,6 +145,7 @@ export default function ToDoForm({
               value={formData.category}
               onChange={onChange}
               name="category"
+              className="p-2 rounded-xl"
             >
               {Object.entries(Category).map(([key, value]) => {
                 return <option key={key}>{value}</option>;
@@ -157,6 +158,7 @@ export default function ToDoForm({
               onChange={onChange}
               value={formData.priority}
               name="priority"
+              className="p-2 rounded-xl"
             >
               {Object.entries(Priority).map(([key, priority]) => {
                 return <option key={key}>{priority}</option>;

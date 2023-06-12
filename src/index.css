@@ -3,11 +3,24 @@
 @tailwind utilities;
 
 .shadow-lg-white {
-  box-shadow: 0 10px 15px -3px rgb(255 255 255 / 0.15),
-    0 4px 6px -4px rgb(255 255 255 / 0.15);
+  box-shadow: 0 10px 15px -3px rgb(255 255 255 / 0.125),
+    0 4px 6px -4px rgb(255 255 255 / 0.125);
+}
+
+.shadow-xl-white {
+  box-shadow: 0 25px 50px -12px rgb(255 255 255/ 0.25);
 }
 
 .temporary-bounce {
   -webkit-animation-iteration-count: 1;
   animation-iteration-count: 1;
+}
+
+.bg-gradient {
+  background: linear-gradient(
+    300.6deg,
+    rgb(0, 0, 0) 0%,
+    rgb(20, 30, 48) 30.2%,
+    rgb(36, 59, 85) 98.1%
+  );
 }

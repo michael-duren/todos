@@ -13,7 +13,7 @@ export default function AvatarPanel() {
         <div
           className={`flex ${
             darkMode &&
-            'bg-gray-800 shadow-lg-white animate-pulse temporary-bounce duration-300'
+            ' shadow-lg-white animate-pulse temporary-bounce duration-300'
           } mx-8 justify-start gap-4 p-2 rounded-xl items-center`}
         >
           <img
@@ -29,7 +29,7 @@ export default function AvatarPanel() {
           className={`m-8 2 rounded-xl ${
             !darkMode
               ? ' bg-gray-50  shadow-lg'
-              : ' bg-gray-800 text-white shadow-lg-white'
+              : '  text-white shadow-lg-white'
           }  p-4 `}
         >
           <h4 className="text-xl">Completed:</h4>

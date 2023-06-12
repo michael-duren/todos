@@ -39,8 +39,16 @@ export default function Header() {
 
   return (
     <>
-      <header className="border-b-2 flex items-center justify-between pb-4">
-        <h1 className="text-3xl flex items-center justify-end">
+      <header
+        className={`${
+          !darkMode && 'border-b-2'
+        } flex items-center justify-between pb-4`}
+      >
+        <h1
+          className={`text-3xl ${
+            darkMode && 'text-white'
+          } flex items-center justify-end`}
+        >
           <span>
             <AssignmentTurnedInIcon fontSize="inherit" />
           </span>

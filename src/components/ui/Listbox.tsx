@@ -1,8 +1,9 @@
-import { Fragment } from 'react';
+import { Fragment, useContext } from 'react';
 import { Listbox, Transition } from '@headlessui/react';
 // import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid';
 import CheckIcon from '@mui/icons-material/Check';
 import UnfoldMoreIcon from '@mui/icons-material/UnfoldMore';
+import { GeneralContext, IGeneralContext } from '../../context/GeneralContext';
 
 interface Props {
   orderBy: string;
@@ -11,10 +12,18 @@ interface Props {
 }
 
 export default function Example({ orderBy, setOrderBy, orderOptions }: Props) {
+  const { darkMode } = useContext(GeneralContext) as IGeneralContext;
+
   return (
     <Listbox value={orderBy} onChange={setOrderBy}>
       <div className="w-32 relative mt-1">
-        <Listbox.Button className="relative w-full cursor-default rounded-lg bg-white py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-300 sm:text-sm">
+        <Listbox.Button
+          className={`relative w-full cursor-default rounded-lg ${
+            darkMode ? 'bg-none text-white' : 'bg-white'
+          }  py-2 pl-3 pr-10 text-left shadow-md 
+          focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white
+          focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-300 sm:text-sm`}
+        >
           <span className="block truncate">{orderBy}</span>
           <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
             <UnfoldMoreIcon
@@ -29,7 +38,12 @@ export default function Example({ orderBy, setOrderBy, orderOptions }: Props) {
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <Listbox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+          <Listbox.Options
+            className={`absolute mt-1 max-h-60 w-full overflow-auto rounded-md ${
+              darkMode && 'bg-opacity-80'
+            } bg-white
+             py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm`}
+          >
             {orderOptions.map((option) => (
               <Listbox.Option
                 key={option}
@@ -43,7 +57,7 @@ export default function Example({ orderBy, setOrderBy, orderOptions }: Props) {
                 {({ selected }) => (
                   <>
                     <span
-                      className={`block truncate ${
+                      className={`block truncate ${darkMode && 'opacity-80'} ${
                         selected ? 'font-medium' : 'font-normal'
                       }`}
                     >

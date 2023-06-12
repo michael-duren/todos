@@ -44,6 +44,15 @@ export const GeneralContextProvider = ({ children }: Props) => {
       .catch((error) => console.error(error));
   }, []);
 
+  useEffect(() => {
+    const userPrefersDark =
+      window.matchMedia &&
+      window.matchMedia('(prefers-color-scheme: dark)').matches;
+    if (userPrefersDark) {
+      setDarkMode(true);
+    }
+  }, []);
+
   return (
     <GeneralContext.Provider
       value={{

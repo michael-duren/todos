@@ -45,8 +45,8 @@ export default function ToDoCardUnComplete({ todo }: Props) {
       : 'bg-white';
   const itemUrgencyDark =
     isItemDue(new Date(dateDue)) && lateView
-      ? 'bg-red-500 bg-opacity-60'
-      : 'bg-gray-600';
+      ? 'bg-red-500 bg-opacity-60 shadow-lg-white'
+      : 'bg-gray-600 shadow-lg-white';
 
   const onComplete = async () => {
     try {

@@ -20,6 +20,7 @@ export default function ItemPanel() {
     setSelectedTodo,
     setUnCompleteToDoList,
     setCompleteToDoList,
+    darkMode,
   } = useContext(GeneralContext) as IGeneralContext;
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -61,9 +62,13 @@ export default function ItemPanel() {
 
   return (
     <>
-      <div className="col-span-3  flex justify-center">
+      <div className="col-span-3   flex justify-center">
         {selectedTodo && (
-          <div className="flex flex-col items-center shadow-lg m-2 p-2 rounded-xl">
+          <div
+            className={`flex flex-col ${
+              darkMode ? ' shadow-xl-white ' : ''
+            } items-center shadow-lg m-2 p-2 rounded-xl`}
+          >
             {/* INFO */}
             <div className="h-full flex flex-col items-center text-gray-700 m-8 w-full">
               <img
@@ -75,7 +80,11 @@ export default function ItemPanel() {
                 {/* Title */}
                 <div>
                   <h2 className="text-xl  items-center flex justify-between">
-                    <span className="text-gray-600">
+                    <span
+                      className={`${
+                        darkMode ? 'text-gray-300' : 'text-gray-600'
+                      } `}
+                    >
                       {toTitleCase(selectedTodo?.name)}
                     </span>
                     <span>
@@ -87,7 +96,11 @@ export default function ItemPanel() {
                   )}
                 </div>
                 {/* Details */}
-                <div className="flex mx-1 text-sm text-gray-500 justify-between">
+                <div
+                  className={`flex mx-1 text-sm ${
+                    darkMode ? 'text-gray-400' : 'text-gray-500'
+                  } justify-between`}
+                >
                   <div className="flex items-center gap-1">
                     <CalendarTodayIcon fontSize="small" />
                     <span>
@@ -101,8 +114,14 @@ export default function ItemPanel() {
                 </div>
                 {/* Description */}
                 <div className="text-sm">
-                  <div className="mb-1">Description:</div>
-                  <div className="text-xs text-gray-500">
+                  <div className={`${darkMode ? 'text-gray-400' : ''} mb-1`}>
+                    Description:
+                  </div>
+                  <div
+                    className={`text-xs ${
+                      darkMode ? 'text-gray-400' : ' text-gray-500'
+                    }`}
+                  >
                     {selectedTodo.description}
                   </div>
                 </div>

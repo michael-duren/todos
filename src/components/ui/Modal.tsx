@@ -1,5 +1,6 @@
 import { Dialog, Transition } from '@headlessui/react';
-import { Fragment } from 'react';
+import { Fragment, useContext } from 'react';
+import { GeneralContext, IGeneralContext } from '../../context/GeneralContext';
 
 interface Props {
   children: React.ReactNode;
@@ -15,6 +16,8 @@ export default function MyModal({
   function closeModal() {
     setIsModalOpen(false);
   }
+
+  const { darkMode } = useContext(GeneralContext) as IGeneralContext;
 
   return (
     <Transition appear show={isModalOpen} as={Fragment}>
@@ -42,7 +45,11 @@ export default function MyModal({
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <Dialog.Panel className="w-full max-w-md  transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
+              <Dialog.Panel
+                className={`w-full max-w-md  transform overflow-hidden rounded-2xl ${
+                  darkMode && 'bg-opacity-80'
+                } bg-white p-6 text-left align-middle shadow-xl transition-all`}
+              >
                 {children}
               </Dialog.Panel>
             </Transition.Child>

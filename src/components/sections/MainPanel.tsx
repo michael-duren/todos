@@ -16,7 +16,7 @@ export default function MainPanel() {
   return (
     <div
       className={` col-span-6 ${
-        darkMode ? 'bg-gray-800 shadow-lg-white' : ''
+        darkMode ? ' shadow-lg-white' : ''
       }  flex justify-center p-4 rounded-xl`}
     >
       <div className="h-full  w-full">
