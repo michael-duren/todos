@@ -17,6 +17,7 @@ interface Props {
 }
 
 export default function ToDoCardUnComplete({ todo }: Props) {
+  const { darkMode } = useContext(GeneralContext) as IGeneralContext;
   const { name, priority, dateDue, category } = todo;
   const {
     unCompleteToDoList: todoList,
@@ -38,10 +39,14 @@ export default function ToDoCardUnComplete({ todo }: Props) {
       ? 'bg-orange-500 text-white'
       : 'bg-blue-500 text-white';
 
-  const itemUrgency =
+  const itemUrgencyLight =
     isItemDue(new Date(dateDue)) && lateView
       ? 'bg-red-500 bg-opacity-20'
       : 'bg-white';
+  const itemUrgencyDark =
+    isItemDue(new Date(dateDue)) && lateView
+      ? 'bg-red-500 bg-opacity-60'
+      : 'bg-gray-600';
 
   const onComplete = async () => {
     try {
@@ -62,7 +67,9 @@ export default function ToDoCardUnComplete({ todo }: Props) {
   return (
     <>
       <div
-        className={`flex ${itemUrgency} my-8 shadow-lg justify-between items-center  p-4 rounded-xl`}
+        className={`flex ${
+          darkMode ? itemUrgencyDark : itemUrgencyLight
+        } my-8 shadow-lg justify-between items-center  p-4 rounded-xl`}
       >
         <div className="flex">
           <button onClick={onComplete} className="group w-20 flex items-center">
@@ -75,16 +82,27 @@ export default function ToDoCardUnComplete({ todo }: Props) {
           </button>
           <h4
             onClick={() => selectItem(todo.id)}
-            className="text-gray-700 font-semibold hover:text-gray-900 hover:font-bold cursor-pointer"
+            className={`${
+              !darkMode
+                ? 'text-gray-700 font-semibold hover:text-gray-900 hover:font-bold cursor-pointer'
+                : 'text-gray-300 font-semibold hover:text-gray-100 hover:font-bold cursor-pointer'
+            }`}
           >
             {toTitleCase(name)}
           </h4>
         </div>
         <div className="flex gap-2 items-center">
-          <div className="text-sm text-gray-500">
+          <div
+            className={`${
+              darkMode ? 'text-gray-300' : 'text-gray-500'
+            } text-sm `}
+          >
             <i>Due {dayjs(dateDue).fromNow()}</i>
           </div>
-          <CategoryIcon category={category} styles="text-gray-500" />
+          <CategoryIcon
+            category={category}
+            styles={`${darkMode ? 'text-gray-300' : 'text-gray-500'}`}
+          />
         </div>
       </div>
     </>

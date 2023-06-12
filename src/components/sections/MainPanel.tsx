@@ -5,18 +5,26 @@ import Listbox from '../ui/Listbox';
 import { sortBy } from '../../utils/sort';
 
 export default function MainPanel() {
-  const { unCompleteToDoList } = useContext(GeneralContext) as IGeneralContext;
+  const { unCompleteToDoList, darkMode } = useContext(
+    GeneralContext
+  ) as IGeneralContext;
   const [orderBy, setOrderBy] = useState<'Due Date' | 'Priority' | 'Category'>(
     'Due Date'
   );
   const orderOptions = ['Due Date', 'Priority', 'Category'];
   const sortedTodos = sortBy(orderBy, unCompleteToDoList);
   return (
-    <div className="col-span-6 flex justify-center">
-      <div className="h-full w-full">
+    <div
+      className={` col-span-6 ${
+        darkMode ? 'bg-gray-800 shadow-lg-white' : ''
+      }  flex justify-center p-4 rounded-xl`}
+    >
+      <div className="h-full  w-full">
         <div className="flex justify-between items-center">
           <div>
-            <h2 className="text-2xl">To Do:</h2>
+            <h2 className={`text-2xl ${darkMode ? 'text-white' : ''}`}>
+              To Do:
+            </h2>
           </div>
           <Listbox
             orderOptions={orderOptions}

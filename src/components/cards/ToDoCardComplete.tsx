@@ -12,7 +12,7 @@ export default function ToDoCardComplete({ todo }: { todo: ToDo }) {
   return (
     <div
       key={id}
-      className={`w-64 my-8 ${
+      className={`w-72  my-4 ${
         !darkMode ? 'bg-white' : 'bg-gray-600'
       }  shadow-sm p-4 rounded-xl`}
     >
@@ -34,7 +34,10 @@ export default function ToDoCardComplete({ todo }: { todo: ToDo }) {
             </h4>
           </div>
         </div>
-        <CategoryIcon category={category} styles="text-gray-500" />
+        <CategoryIcon
+          category={category}
+          styles={`${darkMode ? 'text-gray-300' : 'text-gray-500'}`}
+        />
       </div>
       <p className="text-[0.7rem] font-light text-right">
         Completed on {dayjs(dateCompleted).format('MM/DD/YYYY')}

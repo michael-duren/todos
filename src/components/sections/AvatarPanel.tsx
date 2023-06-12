@@ -1,4 +1,4 @@
-import { Fragment, useContext } from 'react';
+import { useContext } from 'react';
 import { GeneralContext, IGeneralContext } from '../../context/GeneralContext';
 import ToDoCardComplete from '../cards/ToDoCardComplete';
 
@@ -30,14 +30,14 @@ export default function AvatarPanel() {
             !darkMode
               ? ' bg-gray-50  shadow-lg'
               : ' bg-gray-800 text-white shadow-lg-white'
-          }  p-4`}
+          }  p-4 `}
         >
           <h4 className="text-xl">Completed:</h4>
           {completeToDoList.map((todo) => {
             return (
-              <Fragment key={todo.id}>
+              <div className="flex flex-col items-center" key={todo.id}>
                 <ToDoCardComplete todo={todo} />
-              </Fragment>
+              </div>
             );
           })}
         </div>
