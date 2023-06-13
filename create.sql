@@ -11,7 +11,9 @@ CREATE TABLE todos (
 	"category" VARCHAR(10)
 )
 
-INSERT INTO todos (name, image, "dateCreated", "dueDate", description, "isCompleted", "priority", "category")
+INSERT INTO todos (name, image, "dateCreated", "dateDue", description, "isCompleted", "priority", "category")
 VALUES 
-('create database', 'https://cdn.guru99.com/images/1/092818_0513_PostgreSQLC9.png', NOW(), '2023-05-29', 'Create a database and dummy data for development', false, 'High', 'work'),
-('create pg routes', 'https://cdn.guru99.com/images/1/092818_0513_PostgreSQLC9.png', NOW(), '2023-06-28', 'Create pg get, put, push, del routes etc.', false, 'Medium', 'school');
+('create database', 'https://www.easeus.com/images_2019/tb/free/2022/json1/images/img.png', 
+NOW(), '2023-05-29', 'Create a database and dummy data for development', false, 'High', 'work'),
+('create pg routes', 'https://www.easeus.com/images_2019/tb/free/2022/json1/images/img.png', NOW(), '2023-06-28', 
+'Create pg get, put, push, del routes etc.', false, 'Medium', 'school');

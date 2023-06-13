@@ -1,7 +1,6 @@
 import { useContext, useState } from 'react';
 import { GeneralContext, IGeneralContext } from '../../context/GeneralContext';
 import { toTitleCase } from '../../utils/toTitleCase';
-import SportsScoreOutlinedIcon from '@mui/icons-material/SportsScoreOutlined';
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
 import CategoryOutlinedIcon from '@mui/icons-material/CategoryOutlined';
 import CheckOutlinedIcon from '@mui/icons-material/CheckOutlined';
@@ -13,6 +12,7 @@ import agent from '../../api/agent';
 import { toast } from 'react-hot-toast';
 import Modal from '../ui/Modal';
 import ToDoForm from '../forms/ToDoForm';
+import PriorityFlag from '../ui/PriorityFlag';
 
 export default function ItemPanel() {
   const {
@@ -23,13 +23,6 @@ export default function ItemPanel() {
     darkMode,
   } = useContext(GeneralContext) as IGeneralContext;
   const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const buttonStyle =
-    (selectedTodo && selectedTodo.priority.toLowerCase()) === 'high'
-      ? 'text-red-500 '
-      : (selectedTodo && selectedTodo.priority.toLowerCase()) === 'medium'
-      ? 'text-orange-500 '
-      : 'text-blue-500 ';
 
   const onComplete = async () => {
     try {
@@ -87,9 +80,7 @@ export default function ItemPanel() {
                     >
                       {toTitleCase(selectedTodo?.name)}
                     </span>
-                    <span>
-                      <SportsScoreOutlinedIcon className={`${buttonStyle}`} />
-                    </span>
+                    <PriorityFlag priority={selectedTodo.priority} />
                   </h2>
                   {isItemDue(new Date(selectedTodo.dateDue)) && (
                     <div className="text-red-500 text-sm">Past Due</div>
