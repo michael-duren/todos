@@ -27,7 +27,7 @@ export default function AvatarPanel() {
         darkMode && 'animate-pulse temporary-bounce duration-300'
       }   flex justify-center`}
     >
-      <div className="flex-col h-full w-full items-center justify-center">
+      <div className="flex-col relative h-full w-full items-center justify-center">
         <div
           className={`flex ${
             darkMode && ' shadow-lg-white '
