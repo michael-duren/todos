@@ -5,6 +5,8 @@ import dayjs from 'dayjs';
 import { GeneralContext, IGeneralContext } from '../../context/GeneralContext';
 import PriorityFlag from './PriorityFlag';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
+import agent from '../../api/agent';
+import { toast } from 'react-hot-toast';
 
 interface Props {
   children: React.ReactNode;
@@ -12,8 +14,38 @@ interface Props {
 }
 
 export default function TodoPopdown({ children, todo }: Props) {
-  const { darkMode } = useContext(GeneralContext) as IGeneralContext;
+  const { darkMode, setUnCompleteToDoList, setCompleteToDoList } = useContext(
+    GeneralContext
+  ) as IGeneralContext;
   const { name, description, dateCompleted, priority } = todo;
+
+  const onDelete = async () => {
+    try {
+      await agent.TodoItems.delete(todo.id);
+      toast.success(`${todo.name} Deleted`);
+      const updatedItems = await agent.TodoItems.listComplete();
+      setCompleteToDoList(updatedItems);
+    } catch (error) {
+      toast.error('Problem deleting item');
+      console.log(error);
+    }
+  };
+
+  const unComplete = async () => {
+    try {
+      const unCompletedTodo = { ...todo };
+      await agent.TodoItems.unComplete(unCompletedTodo, unCompletedTodo.id);
+      toast.success(`${todo.name} Completion Undone`);
+      const updatedItems = await agent.TodoItems.listComplete();
+      setCompleteToDoList(updatedItems);
+      const updatedUnCompleteItems = await agent.TodoItems.listUnComplete();
+      setUnCompleteToDoList(updatedUnCompleteItems);
+    } catch (error) {
+      toast.error('Problem undoing completion of item');
+      console.log(error);
+    }
+  };
+
   return (
     <Popover>
       {({ open }) => (
@@ -48,12 +80,14 @@ export default function TodoPopdown({ children, todo }: Props) {
                 <p className="text-xs mt-2">{description}</p>
                 <div className="mt-4 flex justify-start gap-4 items-center">
                   <button
+                    onClick={() => unComplete()}
                     className="bg-orange-500 shadow-lg transition-all duration-300 active:scale-105 text-xs text-white px-2 py-2 h-8 
             hover:bg-opacity-100 bg-opacity-80 rounded-xl"
                   >
                     Undo
                   </button>
                   <button
+                    onClick={() => onDelete()}
                     className="bg-red-500 shadow-lg transition-all duration-300 active:scale-105 text-xs aspect-square items-center flex justify-center text-white px-2 py-2 h-8 
             hover:bg-opacity-100 bg-opacity-80 rounded-xl"
                   >
