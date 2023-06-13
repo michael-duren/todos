@@ -9,6 +9,7 @@ import Modal from '../ui/Modal';
 import ToDoForm from '../forms/ToDoForm';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
+import dayjs from 'dayjs';
 
 export default function Header() {
   const {
@@ -45,16 +46,21 @@ export default function Header() {
           !darkMode && 'border-b-2'
         } flex items-center justify-between pb-4`}
       >
-        <h1
-          className={`text-3xl ${
-            darkMode && 'text-white'
-          } flex items-center justify-end`}
-        >
-          <span>
-            <AssignmentTurnedInIcon fontSize="inherit" />
-          </span>
-          Todos
-        </h1>
+        <div className="flex gap-2 flex-col">
+          <h1
+            className={`text-3xl ${
+              darkMode && 'text-white'
+            } flex items-center justify-start`}
+          >
+            <span>
+              <AssignmentTurnedInIcon fontSize="inherit" />
+            </span>
+            Todos
+          </h1>
+          <div className={`${darkMode ? 'text-white' : ''} text-sm`}>
+            {dayjs(new Date()).format('dddd, MMMM D, YYYY')}
+          </div>
+        </div>
         <Dropdown invert={false} title="Actions" items={dropDownOptions} />
       </header>
       <Modal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen}>
