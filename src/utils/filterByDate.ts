@@ -4,7 +4,7 @@ type OrderBy = 'Today' | 'Week' | 'Month' | 'Year';
 
 export const filterByDate = (todo: ToDo, orderBy: OrderBy) => {
   const today = new Date();
-  const todoDate = new Date(todo.dateDue);
+  const todoDate = new Date(todo.dateCompleted!);
   const week = new Date();
   week.setDate(today.getDate() + 7);
   const month = new Date();
