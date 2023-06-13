@@ -15,6 +15,8 @@ export interface IGeneralContext {
   setLateView: React.Dispatch<React.SetStateAction<boolean>>;
   darkMode: boolean;
   setDarkMode: React.Dispatch<React.SetStateAction<boolean>>;
+  filteredCompleteToDoList: ToDo[];
+  setFilteredCompleteToDoList: React.Dispatch<React.SetStateAction<ToDo[]>>;
 }
 
 export const GeneralContext = createContext<IGeneralContext | null>(null);
@@ -27,6 +29,9 @@ export const GeneralContextProvider = ({ children }: Props) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [unCompleteToDoList, setUnCompleteToDoList] = useState<ToDo[]>([]);
   const [completeToDoList, setCompleteToDoList] = useState<ToDo[]>([]);
+  const [filteredCompleteToDoList, setFilteredCompleteToDoList] = useState<
+    ToDo[]
+  >([]);
   const [selectedTodo, setSelectedTodo] = useState<ToDo | null>(null);
   const [lateView, setLateView] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
@@ -40,7 +45,10 @@ export const GeneralContextProvider = ({ children }: Props) => {
       .catch((error) => console.error(error));
 
     agent.TodoItems.listComplete()
-      .then((items) => setCompleteToDoList(items))
+      .then((items) => {
+        setCompleteToDoList(items);
+        setFilteredCompleteToDoList(items);
+      })
       .catch((error) => console.error(error));
   }, []);
 
@@ -68,6 +76,8 @@ export const GeneralContextProvider = ({ children }: Props) => {
         setLateView,
         darkMode,
         setDarkMode,
+        filteredCompleteToDoList,
+        setFilteredCompleteToDoList,
       }}
     >
       {children}

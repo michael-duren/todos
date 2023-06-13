@@ -1,20 +1,25 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { GeneralContext, IGeneralContext } from '../../context/GeneralContext';
 import ToDoCardComplete from '../cards/ToDoCardComplete';
 import ListSelection from '../ui/ListSelection';
+import { filterByDate } from '../../utils/filterByDate';
 
 export default function AvatarPanel() {
-  const { completeToDoList, darkMode } = useContext(
-    GeneralContext
-  ) as IGeneralContext;
-  type OrderBy = 'Today' | 'This Week' | 'This Month' | 'This Year';
+  const {
+    completeToDoList,
+    setFilteredCompleteToDoList,
+    filteredCompleteToDoList,
+    darkMode,
+  } = useContext(GeneralContext) as IGeneralContext;
+  type OrderBy = 'Today' | 'Week' | 'Month' | 'Year';
   const [orderBy, setOrderBy] = useState<OrderBy>('Today');
-  const orderOptions: OrderBy[] = [
-    'Today',
-    'This Week',
-    'This Month',
-    'This Year',
-  ];
+  const orderOptions: OrderBy[] = ['Today', 'Week', 'Month', 'Year'];
+
+  useEffect(() => {
+    setFilteredCompleteToDoList(
+      completeToDoList.filter((toDo) => filterByDate(toDo, orderBy))
+    );
+  }, [orderBy]);
 
   return (
     <div
@@ -44,14 +49,16 @@ export default function AvatarPanel() {
               : '  text-white shadow-lg-white'
           }  p-4 `}
         >
-          <h4 className="text-xl">Completed:</h4>
-          <ListSelection
-            orderBy={orderBy}
-            setOrderBy={setOrderBy}
-            orderOptions={orderOptions}
-          />
+          <div className="flex mb-4 justify-between items-center">
+            <h4 className="text-xl">Completed:</h4>
+            <ListSelection
+              orderBy={orderBy}
+              setOrderBy={setOrderBy}
+              orderOptions={orderOptions}
+            />
+          </div>
           <div className="max-h-[50vh] overflow-y-scroll ">
-            {completeToDoList.map((todo) => {
+            {filteredCompleteToDoList.map((todo) => {
               return (
                 <div className="flex mr-2 flex-col items-center" key={todo.id}>
                   <ToDoCardComplete todo={todo} />
