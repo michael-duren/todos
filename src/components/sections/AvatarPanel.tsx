@@ -19,7 +19,7 @@ export default function AvatarPanel() {
     setFilteredCompleteToDoList(
       completeToDoList.filter((toDo) => filterByDate(toDo, orderBy))
     );
-  }, [orderBy]);
+  }, [orderBy, completeToDoList]);
 
   return (
     <div

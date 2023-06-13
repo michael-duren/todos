@@ -1,6 +1,7 @@
 import React, { createContext, useEffect, useState } from 'react';
 import ToDo from '../models/todo';
 import agent from '../api/agent';
+import { filterByDate } from '../utils/filterByDate';
 
 export interface IGeneralContext {
   isModalOpen: boolean;
@@ -47,7 +48,9 @@ export const GeneralContextProvider = ({ children }: Props) => {
     agent.TodoItems.listComplete()
       .then((items) => {
         setCompleteToDoList(items);
-        setFilteredCompleteToDoList(items);
+        setFilteredCompleteToDoList(
+          completeToDoList.filter((toDo) => filterByDate(toDo, 'Today'))
+        );
       })
       .catch((error) => console.error(error));
   }, []);
