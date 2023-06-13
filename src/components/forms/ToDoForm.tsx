@@ -47,8 +47,13 @@ export default function ToDoForm({
 
   const onSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
+
     if (!isEdit) {
       const newToDo = { ...formData, dateCreated: new Date().toISOString() };
+      if (newToDo.image === '') {
+        newToDo.image =
+          'https://www.easeus.com/images_2019/tb/free/2022/json1/images/img.png';
+      }
       setFormData(initialState);
       setIsModalOpen(false);
 
@@ -108,12 +113,11 @@ export default function ToDoForm({
         />
         <label htmlFor="ImageURL">ImageURL</label>
         <input
-          required
           onChange={onChange}
           value={formData.image}
           type="text"
           className="my-4 p-2 border-2 rounded-xl"
-          placeholder="ImageURL"
+          placeholder="https://www.easeus.com/images_2019/tb/free/2022/json1/images/img.png"
           name="image"
         />
         <label htmlFor="description">Description</label>

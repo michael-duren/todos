@@ -47,7 +47,7 @@ export default function MyModal({
             >
               <Dialog.Panel
                 className={`w-full max-w-md  transform overflow-hidden rounded-2xl ${
-                  darkMode && 'bg-opacity-80'
+                  darkMode && 'bg-opacity-90'
                 } bg-white p-6 text-left align-middle shadow-xl transition-all`}
               >
                 {children}

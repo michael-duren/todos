@@ -16,7 +16,9 @@ export default function MainPanel() {
   return (
     <div
       className={` col-span-6 ${
-        darkMode ? ' shadow-lg-white' : ''
+        darkMode
+          ? 'animate-pulse temporary-bounce duration-300 shadow-lg-white'
+          : ''
       }  flex justify-center p-4 rounded-xl`}
     >
       <div className="h-full  w-full">

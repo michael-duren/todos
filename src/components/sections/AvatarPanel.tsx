@@ -8,12 +8,15 @@ export default function AvatarPanel() {
   ) as IGeneralContext;
 
   return (
-    <div className="col-span-3  flex justify-center">
+    <div
+      className={`col-span-3 ${
+        darkMode && 'animate-pulse temporary-bounce duration-300'
+      }   flex justify-center`}
+    >
       <div className="flex-col h-full w-full items-center justify-center">
         <div
           className={`flex ${
-            darkMode &&
-            ' shadow-lg-white animate-pulse temporary-bounce duration-300'
+            darkMode && ' shadow-lg-white '
           } mx-8 justify-start gap-4 p-2 rounded-xl items-center`}
         >
           <img
@@ -33,13 +36,15 @@ export default function AvatarPanel() {
           }  p-4 `}
         >
           <h4 className="text-xl">Completed:</h4>
-          {completeToDoList.map((todo) => {
-            return (
-              <div className="flex flex-col items-center" key={todo.id}>
-                <ToDoCardComplete todo={todo} />
-              </div>
-            );
-          })}
+          <div className="max-h-[50vh] overflow-y-scroll ">
+            {completeToDoList.map((todo) => {
+              return (
+                <div className="flex mr-2 flex-col items-center" key={todo.id}>
+                  <ToDoCardComplete todo={todo} />
+                </div>
+              );
+            })}
+          </div>
         </div>
       </div>
     </div>
