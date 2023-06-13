@@ -1,11 +1,20 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { GeneralContext, IGeneralContext } from '../../context/GeneralContext';
 import ToDoCardComplete from '../cards/ToDoCardComplete';
+import ListSelection from '../ui/ListSelection';
 
 export default function AvatarPanel() {
   const { completeToDoList, darkMode } = useContext(
     GeneralContext
   ) as IGeneralContext;
+  type OrderBy = 'Today' | 'This Week' | 'This Month' | 'This Year';
+  const [orderBy, setOrderBy] = useState<OrderBy>('Today');
+  const orderOptions: OrderBy[] = [
+    'Today',
+    'This Week',
+    'This Month',
+    'This Year',
+  ];
 
   return (
     <div
@@ -36,6 +45,11 @@ export default function AvatarPanel() {
           }  p-4 `}
         >
           <h4 className="text-xl">Completed:</h4>
+          <ListSelection
+            orderBy={orderBy}
+            setOrderBy={setOrderBy}
+            orderOptions={orderOptions}
+          />
           <div className="max-h-[50vh] overflow-y-scroll ">
             {completeToDoList.map((todo) => {
               return (

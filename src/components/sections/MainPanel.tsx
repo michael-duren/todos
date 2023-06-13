@@ -1,17 +1,16 @@
 import { useContext, useState } from 'react';
 import { GeneralContext, IGeneralContext } from '../../context/GeneralContext';
 import ToDoCardUnComplete from '../cards/ToDoCardUnComplete';
-import Listbox from '../ui/Listbox';
+import ListSelection from '../ui/ListSelection';
 import { sortBy } from '../../utils/sort';
 
 export default function MainPanel() {
   const { unCompleteToDoList, darkMode } = useContext(
     GeneralContext
   ) as IGeneralContext;
-  const [orderBy, setOrderBy] = useState<'Due Date' | 'Priority' | 'Category'>(
-    'Due Date'
-  );
-  const orderOptions = ['Due Date', 'Priority', 'Category'];
+  type OrderBy = 'Due Date' | 'Priority' | 'Category';
+  const [orderBy, setOrderBy] = useState<OrderBy>('Due Date');
+  const orderOptions: OrderBy[] = ['Due Date', 'Priority', 'Category'];
   const sortedTodos = sortBy(orderBy, unCompleteToDoList);
   return (
     <div
@@ -28,7 +27,7 @@ export default function MainPanel() {
               To Do:
             </h2>
           </div>
-          <Listbox
+          <ListSelection
             orderOptions={orderOptions}
             orderBy={orderBy}
             setOrderBy={setOrderBy}

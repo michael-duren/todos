@@ -1,17 +1,20 @@
-import { Fragment, useContext } from 'react';
+import React, { Fragment, useContext } from 'react';
 import { Listbox, Transition } from '@headlessui/react';
-// import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid';
 import CheckIcon from '@mui/icons-material/Check';
 import UnfoldMoreIcon from '@mui/icons-material/UnfoldMore';
 import { GeneralContext, IGeneralContext } from '../../context/GeneralContext';
 
-interface Props {
-  orderBy: string;
-  setOrderBy: (value: 'Due Date' | 'Priority') => void;
-  orderOptions: string[];
+interface Props<T> {
+  orderBy: T;
+  setOrderBy: React.Dispatch<React.SetStateAction<T>>;
+  orderOptions: T[];
 }
 
-export default function Example({ orderBy, setOrderBy, orderOptions }: Props) {
+export default function ListSelection<T extends string>({
+  orderBy,
+  setOrderBy,
+  orderOptions,
+}: Props<T>) {
   const { darkMode } = useContext(GeneralContext) as IGeneralContext;
 
   return (
