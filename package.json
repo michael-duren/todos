@@ -4,6 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "start": "nodemon --exec 'ts-node-esm' ./server/server.ts",
     "server": "nodemon --exec 'ts-node-esm' ./server/server.ts",
     "client": "vite",
     "build": "tsc && vite build",
