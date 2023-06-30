@@ -4,10 +4,12 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "start": "nodemon --exec 'ts-node-esm' ./server/server.ts",
+    "start": "node dist/index.js",
+    "postinstall": "npm run build:client && npm run build:server",
     "server": "nodemon --exec 'ts-node-esm' ./server/server.ts",
     "client": "vite",
-    "build": "tsc && vite build",
+    "build:client": "tsc && vite build",
+    "build:server": "tsc",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
