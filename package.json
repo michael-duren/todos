@@ -2,10 +2,9 @@
   "name": "weekend-sql-to-do-react",
   "private": true,
   "version": "0.0.0",
-  "type": "module",
+  "type": "commonjs",
   "scripts": {
-    "start": "node dist/index.js",
-    "postinstall": "npm run build:client && npm run build:server",
+    "start": "node server/dist/server/server.js",
     "server": "nodemon --exec 'ts-node-esm' ./server/server.ts",
     "client": "vite",
     "build:client": "tsc && vite build",

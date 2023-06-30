@@ -35,7 +35,7 @@ export default function AvatarPanel() {
         >
           <img
             className="h-20 w-20 rounded-full"
-            src="src/assets/Avatar-self.png"
+            src="assets/Avatar-self.png"
             alt="user avatar"
           />
           <h3 className={`text-lg ${darkMode && 'text-white'}`}>
