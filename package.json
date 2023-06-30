@@ -5,6 +5,7 @@
   "type": "commonjs",
   "scripts": {
     "start": "node server/dist/server/server.js",
+    "postinstall": "tsc --project server",
     "server": "nodemon --exec 'ts-node-esm' ./server/server.ts",
     "client": "vite",
     "build:client": "tsc && vite build",
