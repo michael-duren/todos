@@ -5,11 +5,7 @@ const PORT = Number(process.env.PORT) || 5000;
 
 /** ---------- MIDDLEWARE ---------- **/
 app.use(express.json()); // needed for axios requests
-app.use(express.static('build'));
-
-app.get('/', (_, res) => {
-  res.send('YOU GOT ME');
-});
+app.use(express.static('dist'));
 
 /** ---------- EXPRESS ROUTES ---------- **/
 app.use('/api/todo', todoRouter);
