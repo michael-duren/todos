@@ -2,7 +2,7 @@
   "name": "weekend-sql-to-do-react",
   "private": true,
   "version": "0.0.0",
-  "type": "module",
+  "type": "commonjs",
   "scripts": {
     "start": "node server/dist/server/server.js",
     "postinstall": "tsc --project server",
