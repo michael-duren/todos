@@ -1,7 +1,7 @@
 import express from 'express';
 import path from 'path';
 const app = express();
-import todoRouter from './routes/todoRouter.ts';
+import todoRouter from './routes/todoRouter';
 const PORT = Number(process.env.PORT) || 5000;
 
 /** ---------- MIDDLEWARE ---------- **/
