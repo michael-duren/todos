@@ -1,4 +1,4 @@
-import pg from 'pg';
+import pg, { Pool } from 'pg';
 
 let pool;
 
@@ -17,4 +17,4 @@ if (process.env.DATABASE_URL) {
   });
 }
 
-export default pool;
+export default pool as Pool;

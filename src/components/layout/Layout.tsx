@@ -16,7 +16,7 @@ export default function Layout({ children }: Props) {
       } min-h-[100vh] p-8`}
     >
       <Header />
-      <main className="min-h-[40rem]  grid grid-cols-12 grid-rows-1 mt-8">
+      <main className="min-h-[40rem]  lg:grid lg:grid-cols-12 lg:grid-rows-1 mt-8">
         {children}
       </main>
     </div>

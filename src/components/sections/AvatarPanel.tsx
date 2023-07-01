@@ -43,13 +43,13 @@ export default function AvatarPanel() {
           </h3>
         </div>
         <div
-          className={`m-8 2 rounded-xl ${
+          className={`m-8   rounded-xl ${
             !darkMode
               ? ' bg-gray-50  shadow-lg'
               : '  text-white shadow-lg-white'
           }  p-4 `}
         >
-          <div className="flex mb-4 justify-between items-center">
+          <div className="flex mb-40 z-32 lg:mb-4 justify-between items-center">
             <h4 className="text-xl">Completed:</h4>
             <ListSelection
               orderBy={orderBy}

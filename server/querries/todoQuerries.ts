@@ -1,6 +1,6 @@
 import { QueryResult } from 'pg';
 import ToDo from '../../src/models/todo';
-import pool from '../modules/pool';
+import pool from '../modules/pool.ts';
 
 export const getItems = async (): Promise<void | ToDo[]> => {
   const query = 'SELECT * FROM todos';

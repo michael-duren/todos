@@ -7,7 +7,7 @@ import {
   getItems,
   getUncompletedItems,
   updateItem,
-} from '../querries/todoQuerries';
+} from '../querries/todoQuerries.ts';
 
 // GET
 todoRouter.get('/', async (_, res) => {

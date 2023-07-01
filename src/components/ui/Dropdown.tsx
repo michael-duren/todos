@@ -30,7 +30,7 @@ export default function Dropdown({ items, title, invert }: DropdownProps) {
       : ' bg-black text-white focus-visible:ring-white ';
 
   return (
-    <div>
+    <div className="z-10">
       <Menu as="div" className="relative inline-block text-left">
         <div>
           <Menu.Button
