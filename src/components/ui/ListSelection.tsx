@@ -19,7 +19,7 @@ export default function ListSelection<T extends string>({
 
   return (
     <Listbox value={orderBy} onChange={setOrderBy}>
-      <div className="w-32 z-20 relative mt-1">
+      <div className="w-32  relative mt-1">
         <Listbox.Button
           className={`relative w-full cursor-default rounded-lg ${
             darkMode ? 'bg-none text-white' : 'bg-white'

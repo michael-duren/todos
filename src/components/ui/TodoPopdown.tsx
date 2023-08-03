@@ -64,7 +64,7 @@ export default function TodoPopdown({ children, todo }: Props) {
             leaveFrom="opacity-100 translate-y-0"
             leaveTo="opacity-0 translate-y-1"
           >
-            <Popover.Panel className="z-10 mt-3 w-full max-w-sm  px-4 sm:px-0 lg:max-w-3xl">
+            <Popover.Panel className=" mt-3 w-full max-w-sm  px-4 sm:px-0 lg:max-w-3xl">
               <div
                 className={` text-sm ${
                   darkMode ? 'bg-gray-400' : 'bg-gray-100'

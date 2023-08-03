@@ -49,7 +49,7 @@ export default function AvatarPanel() {
               : '  text-white shadow-lg-white'
           }  p-4 `}
         >
-          <div className="flex mb-40 z-32 lg:mb-4 justify-between items-center">
+          <div className="flex mb-40 lg:mb-4 justify-between items-center">
             <h4 className="text-xl">Completed:</h4>
             <ListSelection
               orderBy={orderBy}
